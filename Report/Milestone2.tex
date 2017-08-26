@@ -60,8 +60,36 @@
 	\pagebreak
 	\section{Milestone 2}
 	\subsection{Requirements}
-	\par Word ladder is a program to go from a start word to a goal word of the same length by changing only one
-	letter at a time. Another program file was implemented to test the functionality of the word ladder. The challenge was that every intermediary word must be present in a provided dictionary I.e. lead -$>$ load -$>$ goad -$>$ gold in 3 steps. The test files used the python unittest module. The users had the option of supplying a list of banned words, and selecting the shortest path for each start to goal word. 
+	\par The current  version of minesweeper successfully meets the requirements of the traditional minesweeper game however it is still yet to implement the hexagon and colour-based minesweeper  modes successfully. 
+		\subsubsection{List of completed requirements}
+		Functionality associated with icons |
+		The program is able to meet this requirements by accomplishing the following actions:
+		\begin{itemize}
+			\item The program shows whether a cell is covered or uncovered by clearly displaying the state of the buttons. The buttons possess a 3D-like image when unclicked, the colour of the buttons change once it is sunken (or clicked) into a darker contrast of the same colour. 
+			\item When a cell with no adjacent mines is clicked, all adjacent cells alike are uncovered until it reaches a cell with adjacent mines. This task was done in a while loop, not recursively (as there was no need) as previously stated. 
+			\item The state of the board, once the buttons are pressed, are represented by a 'backing grid' which assigns all cells with a number or mine, according to the randomly generated mines and its coordinates.
+			\item The program displays whether a cell has a mine or not by representing it with an image of a mine when pressed and also displaying a message that the game is over.
+		\end{itemize}
+		
+		Displaying icons |
+		\par The program uses the tkinter module and its button component. This makes responding to left mouse click for icon display possible. The left click implementation for the flag is yet to be implemented. 
+		
+		Losing a game |
+		\par When the user clicks on a button which reveals a mine, a message is displayed in the window "Game Over!" and the state of the game is disabled. 
+		
+		Difficulty |
+		\par The user has the ability to select a difficulty: beginner, intermediate or advanced. When a difficulty is selected, it resets the board to that chosen difficulty. 
+		
+		Options |
+		\par The user is able to start the game by selecting a difficulty and not a game mode, the program will default to the basic minesweeper game. Selecting the cross at the top right of the window will exit the program and window. The pause button is identified by the universal word "pause" and will disable the game and stop the timer until pressed again and the game is resumed.
+		
+		\subsubsection{Prioritized list of on-going requirements}
+		\begin{itemize}
+			\item The user is able to flag a cell that they believe is a mine.
+			\item The scoring system of the game - the game timer. 
+			\item The different game modes
+		\end{itemize}	
+	
 	
 	\subsection{Product Use Cases}
 	\textbf{The following list itemizes the user requirements for the implementation of the Ladder-gram program}
