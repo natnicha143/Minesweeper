@@ -70,45 +70,46 @@
 			\item The state of the board, once the buttons are pressed, are represented by a 'backing grid' which assigns all cells with a number or mine, according to the randomly generated mines and its coordinates.
 			\item The program displays whether a cell has a mine or not by representing it with an image of a mine when pressed and also displaying a message that the game is over.
 		\end{itemize}
-		
+
 		Displaying icons |
-		\par The program uses the tkinter module and its button component. This makes responding to left mouse click for icon display possible. The left click implementation for the flag is yet to be implemented. 
-		
-		Losing a game |
-		\par When the user clicks on a button which reveals a mine, a message is displayed in the window "Game Over!" and the state of the game is disabled. 
-		
-		Difficulty |
-		\par The user has the ability to select a difficulty: beginner, intermediate or advanced. When a difficulty is selected, it resets the board to that chosen difficulty. 
-		
-		Options |
-		\par The user is able to start the game by selecting a difficulty and not a game mode, the program will default to the basic minesweeper game. Selecting the cross at the top right of the window will exit the program and window. The pause button is identified by the universal word "pause" and will disable the game and stop the timer until pressed again and the game is resumed.
-		
-		\subsubsection{Prioritized list of on-going requirements}
 		\begin{itemize}
-			\item The user is able to flag a cell that they believe is a mine.
-			\item The scoring system of the game - the game timer. 
-			\item The different game modes
-		\end{itemize}	
-	
+		\par
+		\item The program uses the tkinter module and its button component. This makes responding to left mouse click for icon display possible. The left click implementation for the flag is yet to be implemented. 
+		\end{itemize}
+		Losing a game |
+		\begin{itemize}
+		\par 
+		\item When the user clicks on a button which reveals a mine, a message is displayed in the window "Game Over!" and the state of the game is disabled. 
+		\end{itemize}
+		Difficulty |
+		\begin{itemize}
+		\par 
+		\item The user has the ability to select a difficulty: beginner, intermediate or advanced. When a difficulty is 	selected, it resets the board to that chosen difficulty. 
+		\end{itemize}
+		Options |
+		\begin{itemize}
+		\par 
+		\item The user is able to start the game by selecting a difficulty and not a game mode, the program will default to the basic minesweeper game. 
+		\item Selecting the cross at the top right of the window will exit the program and window. 
+		\item The pause button is identified by the universal word "pause" and will disable the game and stop the timer until pressed again and the game is resumed.
+		\end{itemize}
+			\subsubsection{Prioritized list of on-going requirements}
+			\begin{itemize}
+				\item The user is able to flag a cell that they believe is a mine.
+				\item The scoring system of the game - the game timer. 
+				\item The different game modes
+			\end{itemize}	
+		
 	
 	\subsection{Product Use Cases}
-	\textbf{The following list itemizes the user requirements for the implementation of the Ladder-gram program}
-	\begin{itemize}
-		\item The user should be able to interact with the program by specifying the dictionary file name $($without the .txt extension$)$.
-		\item The user should be able to interact with the program by specifying the source and target word.
-		\item The user should be able to supply a list of words that cannot be used in the path solution by specifying the file name and placing it in the same directory as the program file.
-		\item The user will have the option of choosing to evaluate the shortest path from source word to target word as the solution.
-	\end{itemize}
+	\textbf{The following are product use cases for minesweeper}
+	
 	
 	\subsection{Software Architecture}
-	\textbf{The following list itemizes the software requirements for the implementation of the Ladder-gram program}
-	\begin{itemize}
-		\item The program will notify the user if the inputs are invalid and the program will exit.
-		\item The program will notify the user if a solution was found.
-		\item If a valid solution is found the program will print it to the console along with the length of the solution.
-		\item If the user chooses to input a list of banned words, the program will remove those words from the working dictionary. 
-		\item The program will evaluate the shortest solution if the user requests.
-	\end{itemize}
+	\textbf{Software architecture being used and its feasibility to remain the same until project completion.}
+	
+	The main programming language used was Python. It is a cross-platform language, being able to run on Windows and Linux. This was one of the main reasons it was chosen. 
+
 	\pagebreak
 	
 	\subsection{Software Design}
