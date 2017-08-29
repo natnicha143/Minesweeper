@@ -96,20 +96,25 @@ def set_buttons():
 
 #look through each adjacent square and if it has no number or mine, add it's adjacent squares 
 def cascade_reveal(i, j):
-    reveal = list()
+    reveal = []
     adjacent = neighbours[i, j]
     for neighbour in adjacent:
         if backing_grid[neighbour[0]][neighbour[1]] == 0:
             reveal.append(neighbour)
     
-    while len(reveal) > 0:
+    while reveal:
         for cell in reveal:
             adjacent = neighbours[cell[0], cell[1]]
+            if backing_grid[cell[0]][cell[1]] == 0:
+                buttons[cell[0]][cell[1]].configure(relief=SUNKEN, text='', background='pink', state='disabled')
+                backing_grid[cell[0]][cell[1]] = 's'
             for neighbour in adjacent:
                 if backing_grid[neighbour[0]][neighbour[1]] == 0:
                     reveal.append(neighbour)
-                buttons[cell[0]][cell[1]].configure(relief=SUNKEN, text='', background='pink', state='disabled')
-                backing_grid[cell[0]][cell[1]] = 's'
+                elif backing_grid[neighbour[0]][neighbour[1]] == 1:
+                    buttons[neighbour[0]][neighbour[1]].configure(relief=SUNKEN, text='1', background='pink', state='disabled')
+                elif backing_grid[neighbour[0]][neighbour[1]] == 2:
+                    buttons[neighbour[0]][neighbour[1]].configure(relief=SUNKEN, text='2', background='pink', state='disabled')
             reveal.remove(cell)
 
 
@@ -141,6 +146,7 @@ neighbours = populate_game()
 buttons = set_buttons()
 mines = generate_mines()
 backing_grid = apply_numeric(neighbours, mines)
+
 #keeps reference to object
 img = PhotoImage(file="mine.png")
 # one = PhotoImage(file="one.png")
