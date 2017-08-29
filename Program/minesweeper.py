@@ -89,7 +89,7 @@ def set_buttons():
     for row in range(length):
         buttons.append([])
         for col in range(width):
-            buttons[row].append(Button(height=2, width=5, command=lambda i=row, j=col: activate_button(i, j)))
+            buttons[row].append(Button(bg="#F597CA", height=2, width=5, command=lambda i=row, j=col: activate_button(i, j)))
             buttons[row][col].grid(row=row, column=col)
     return buttons 
 
