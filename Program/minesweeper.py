@@ -71,15 +71,20 @@ def apply_numeric(neighbours, mines):
 
 
 def activate_button(i, j):
-    buttons[i][j].configure(relief=SUNKEN, text=backing_grid[i][j], state='disabled', background='pink')
-    click_mine(i, j)
+    buttons[i][j].configure(relief=SUNKEN, text=backing_grid[i][j], command='', background='pink')
+    if backing_grid[i][j] == 'B':
+        game_over()
     click_other(i, j)
 
-def click_mine(i, j):
-    if backing_grid[i][j] == 'B':
-        buttons[i][j].configure(image=img, height=35, width=38, background='red', state='normal')
-        messagebox.showinfo("Game over", "You clicked on a mine!") 
-
+def game_over():
+    for i in range(length):
+        for j in range(width): 
+            if backing_grid[i][j] == 'B':
+                buttons[i][j].configure(image=img, height=35, width=38, background='red', command='')
+            else:
+                buttons[i][j].configure(command='')
+    messagebox.showinfo("Mine sweeper", "Game Over!") 
+ 
 def click_other(i, j):
     if backing_grid[i][j] == 0:
         cascade_reveal(i, j)
