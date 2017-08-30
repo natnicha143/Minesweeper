@@ -1,4 +1,5 @@
-#NATNICHA TITIPHANPONG
+#~.~.~.~NATNICHA TITIPHANPONG~.~.~.~#
+
 import random as rand
 import time
 from tkinter import *
@@ -72,7 +73,7 @@ def apply_numeric(neighbours, mines):
 
 #look through each adjacent square and if it has no number or mine, add it's adjacent squares 
 def cascade_reveal(i, j):
-    reveal = []
+    reveal = list()
     adjacent = neighbours[i, j]
     for neighbour in adjacent:
         if backing_grid[neighbour[0]][neighbour[1]] == 0:
@@ -157,14 +158,10 @@ img = PhotoImage(file="mine.png")
 
 
 #~.~.~.~.~.~.~.~
-root = Tk()
-root.withdraw()
-root.title("Mine sweeper")
-frame = Frame(root, height=400, width=400, bg='black')
+master = Tk()
+master.title("Mine sweeper")
+frame = Frame(master, height=400, width=400, bg='black')
 frame.pack(side=LEFT, expand=1)
-
-
-
 
 # quitButton = Button(text="Quit", command=quit)
 # resetButton = Button(root, text="Restart", command=reset_program).pack()
@@ -173,4 +170,4 @@ frame.pack(side=LEFT, expand=1)
 
 #Label(root, text="""Select a difficulty:""", justify = RIGHT, padx = 20).pack()
 
-root.mainloop()
+master.mainloop()
