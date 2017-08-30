@@ -151,7 +151,7 @@ size = width * length
 neighbours = populate_game()
 mines = generate_mines()
 backing_grid = apply_numeric(neighbours, mines)
-buttons = set_buttons(frame)
+buttons = set_buttons(
 img = PhotoImage(file="mine.png")
 #~.~.~.~.~.~.~.~
 

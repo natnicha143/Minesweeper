@@ -1,0 +1,327 @@
+\documentclass[12pt, a4]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.8in]{geometry}
+\def\thesection{\arabic{section}}
+\setcounter{tocdepth}{4}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+% Below are for the code blocks
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{rotating}
+
+% Below are table config
+\setlength{\arrayrulewidth}{0.5mm}
+\setlength{\tabcolsep}{10pt}
+\renewcommand{\arraystretch}{1.5}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.5,0.92}
+\definecolor{bittersweet}{rgb}{1.0, 0.44, 0.37}
+\definecolor{cosmiclatte}{rgb}{0.93, 0.93, 0.93}
+\definecolor{eggshell}{rgb}{0.94, 0.94, 0.9}
+\definecolor{fandango}{rgb}{0.71, 0.2, 0.54}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{cosmiclatte},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{fandango}\small,
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,        
+	breaklines=true,               
+	captionpos=b,                    
+	keepspaces=true,  
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\title{2805ICT, Milestone 2: Progress Report}
+\author{Natnicha Titiphanpong, s2940970}%\thanks{}}
+\date{\today}
+
+\begin{document}
+	
+	\begin{titlepage}
+		\maketitle
+	\end{titlepage}
+	\tableofcontents
+	\pagebreak
+	\section{Milestone 2}
+	\subsection{Requirements}
+	\par The current  version of minesweeper successfully meets the requirements of the traditional minesweeper game however it is still yet to implement the hexagon and colour-based minesweeper  modes successfully. 
+		\subsubsection{List of completed requirements}
+		Functionality associated with icons |
+		The program is able to meet this requirements by accomplishing the following actions:
+		\begin{itemize}
+			\item The program shows whether a cell is covered or uncovered by clearly displaying the state of the buttons. The buttons possess a 3D-like image when unclicked, the colour of the buttons change once it is sunken (or clicked) into a darker contrast of the same colour. 
+			\item When a cell with no adjacent mines is clicked, all adjacent cells alike are uncovered until it reaches a cell with adjacent mines. This task was done in a while loop, not recursively (as there was no need) as previously stated. 
+			\item The state of the board, once the buttons are pressed, are represented by a 'backing grid' which assigns all cells with a number or mine, according to the randomly generated mines and its coordinates.
+			\item The program displays whether a cell has a mine or not by representing it with an image of a mine when pressed and also displaying a message that the game is over.
+		\end{itemize}
+		\newline
+		Displaying icons |
+		\begin{itemize}
+		\par
+		\item The program uses the tkinter module and its button component. This makes responding to left mouse click for icon display possible. The left click implementation for the flag is yet to be implemented. 
+		\end{itemize}
+		Losing a game |
+		\begin{itemize}
+		\par 
+		\item When the user clicks on a button which reveals a mine, a message is displayed in the window "Game Over!" and the state of the game is disabled. 
+		\end{itemize}
+		Difficulty |
+		\begin{itemize}
+		\par 
+		\item The user has the ability to select a difficulty: beginner, intermediate or advanced. When a difficulty is 	selected, it resets the board to that chosen difficulty and board dimension associated. 
+		\end{itemize}
+		Options |
+		\begin{itemize}
+		\par 
+		\item The user is able to start the game by selecting a difficulty and not a game mode, the program will default to the basic minesweeper game. 
+		\item Selecting the cross at the top right of the window will exit the program and window. 
+		\end{itemize}
+			\subsubsection{Prioritized list of on-going requirements}
+			\begin{itemize}
+				\item The user is able to flag a cell that they believe is a mine.
+				\item If all mines are flagged, the game is won.
+				\item The scoring system of the game - the game timer. 
+				\item The hexagon and colour-based minesweeper.
+			\end{itemize}	
+		
+	
+	\subsection{Product Use Cases}
+	\subsubsection{Completed}
+	\begin{table}[ht]
+	\begin{tabular}{|p{4cm}|p{12cm}|}
+		\hline
+		 & Description \\
+		\hline
+		Use case name & Game over \\
+		Brief description & The game ends when a mine is uncovered. When the game ends, all ability to interact with the current state of the game will be lost. All the existing mines will uncover, the timer will stop and the score will be set. \\
+		Actors & Player. \\
+		Entry condition & Player must click on a button that uncovers a mine. \\
+		Exit condition & The current game will stop, there will be no further interaction with the current board and the timer will stop. \\
+		Flow of activities & 1. The player uncovers a tile with a hidden mine. \newline 2. The system reveals the tile is a mine. \newline 3. The system reveals all existing mines on the board. \newline 4. The system disables the board state and timer. \newline 5. The system displays a message notifying the player "Game over". \\
+		Exception conditions & The tile is flagged and cannot be uncovered.\\
+		\hline
+	\end{tabular}
+	\end{table}
+
+	\begin{table}[ht]
+	\begin{tabular}{|p{4cm}|p{12cm}|}
+		\hline
+		 & Description \\
+		\hline
+		Use case name & Uncover empty neighbour of tiles. \\
+		Brief description & The player uncovers an empty tile and continues to uncover empty adjacent tiles while the loop condition is satisfied. \\
+		Actors & Player \\
+		Entry condition & Player must click on an empty cell with empty adjacent cells. \\
+		Exit condition & A portion of the board is revealed with empty cells until a number greater than 0 is reached. \\
+		Flow of activities & 1. Player reveals empty cell. \newline 2. System uncovers grid of empty mines until a number is reached. \newline 3. System reveals the first set of adjacent numbers for the empty tiles.\\
+		Exception conditions & If an empty cell does not have any empty neighbouring cells, this will not occur.\\
+		\hline
+	\end{tabular}
+	\end{table}
+
+	\pagebreak
+
+	\begin{table}[ht]
+	\begin{tabular}{|p{4cm}|p{12cm}|}
+		\hline
+		 & Description \\
+		\hline
+		Use case name & Player chooses game difficulty. \\
+		Brief description & The player has three difficulty levels to choose from before starting a new game. \\
+		Actors & Player. \\
+		Entry condition & The program must be executed. \\
+		Exit condition & The dimension of the board is set according to the difficulty chosen and the game is playable. \\
+		Flow of activities & 1. Player runs program. \newline 2. Player chooses difficulty from three given.\\
+		Exception conditions & No exceptions, game will not start without choosing a difficulty.\\
+		\hline
+	\end{tabular}
+	\end{table}
+
+\pagebreak 
+	\subsubsection{Pending}
+	\begin{table}[ht]
+	\begin{tabular}{|p{4cm}|p{12cm}|}
+		\hline
+		 & Description \\
+		\hline
+		Use case name & Player flags a tile \\
+		Brief description & The player flags a tile if it is believed that the tile will uncover a mine. \\
+		Actors & Player. \\
+		Entry condition & Player flags an unrevealed tile (right click). \\
+		Exit condition & The button is no longer clickable until the player unflags it (right click). \\
+		Flow of activities & 1. Player right clicks a tile to flag it \newline 2. The system represents the tile with a flag. \newline 3. The system stops the left click activation for that tile and deems the tile to be disabled. \\
+		Exception conditions & If the tile is already uncovered, it cannot be flagged.\\
+		\hline
+	\end{tabular}
+	\end{table}
+
+	\begin{table}[ht]
+	\begin{tabular}{|p{4cm}|p{12cm}|}
+		\hline
+		 & Description \\
+		\hline
+		Use case name & Game timer \\
+		Brief description & The game timer is the scoring system for the minesweeper game. The shorter the time, the better the score. It begins as soon as the difficulty and game mode is selected for the game. \\
+		Actors & Player. \\
+		Entry condition & Game difficulty and game mode is selected. \\
+		Exit condition & Timer stops when a game is either won or lost. \\
+		Flow of activities & 1. Player starts new game by selecing mode and difficulty \newline 2. System starts timer \newline 3. System stops timer if: game is won or game is lost. \\
+		Exception conditions & Player exits game and the time is lost.\\
+		\hline
+	\end{tabular}
+	\end{table}
+
+	\begin{table}[ht]
+	\begin{tabular}{|p{4cm}|p{12cm}|}
+		\hline
+		& Description \\
+		\hline
+		Use case name & Player resets game. \\
+		Brief description & The player may reset the game when desired otherwise the player is prompt to restart the game once completed. A completed game can either be won or lost. \\
+		Actors & Player. \\
+		Entry condition & The game can be reset anytime the board has been configured. The only entry condition would be starting the game once. \\
+		Exit condition & The game is reset. \\
+		Flow of activities & 1. Player starts new game by selecing mode and difficulty \newline 2. System starts timer \newline 3. System stops timer if: game is won or game is lost. \\
+		Exception conditions & None.\\
+		\hline
+	\end{tabular}
+	\end{table}
+	
+	\pagebreak
+	
+	\subsection{Software Architecture}
+	
+	\par The minesweeper program uses a high level system best described as Model View Controller(MVC). By having an architecture, the program can be split up into three different components which handle different parts of the program. The model component divides the behaviour and data from the view, and can only be changed according to the controller. There are two models: MinesweeperModel and ScoreModel. The MinesweeperModel includes the information about where the mines are on the board, and assigns each tile its number along with the current state of the game. The view component manages the Graphical User Interface (GUI) of the system. It displays the board according to the updates of the model and information provided by the controller, the controller facilitates actions/data between Model and View. The view class is referred to as GameView. The controller component is what the player/user uses to interact with the game. There are two controller classes: MenuController and ButtonController. The MenuController handles the menu interactions from the user whilst the ButtonController handles the clicking of buttons in the game.
+	\newline
+	\par The MVC architecture allows developers to write unit testable code. For smaller programs such as minesweeper, both model classes can be unit tested sufficiently to ensure there are no underlying issues. 
+	
+	\par The main programming language used was Python. It is a cross-platform language, being able to run on Windows and Linux. This was one of the main reasons it was chosen. 
+
+	\pagebreak
+	
+	\subsection{Software Design}
+	\subsubsection{}
+	
+	
+	\pagebreak
+	
+	
+	\subsection{Testing}
+	
+	
+	\begin{tabular}{ |p{0.5cm}|p{5cm}|p{5cm}|p{5cm}| }
+		\hline
+		No. & Test Case & Expected Results & Actual Results \\
+		\hline
+		1.0 & \textbf{Test User Input} &  & \\
+		1.1 & Source word contains number. & Program displays error message: ``Source or target input words cannot contain numbers or special characters" and system exits. & As expected.\\
+		1.2 & Target word input contains special character. & Program displays error message: ``Input words cannot contain numbers or special characters" and system exits. & As expected. \\
+		1.3 & Source word input contains special character. & Program displays error message: ``Input words cannot contain numbers or special characters" and system exits. & As expected. \\
+		1.4 & Target word input contains number. & Program displays error message: ``Input words cannot contain numbers or special characters and system exits." & As expected. \\
+		1.5 & Source and target words are the same. & System prints error: ``Start and target words cannot be the same." & As expected. \\
+		1.6 & Target word input is of different length to source word. & System prints error message: ``Start and target words must be the same length." & As expected. \\
+		1.7 & Check whether init function returns source and target word after input is validated. & Function returns source word as the first element in the list and target as second. & As expected.\\
+		2.0 & \textbf{Test Helper Functions} &  &  \\
+		2.1 & Test same function and whether it returns the correct number of identical letters. & Test case returns true if same function returns 4 for `lead' \& `lead', 3 for `lead' \& `mead' and false if `hello' \& `there' equals 0. & As expected. \\
+		\hline
+	\end{tabular}
+	
+	\pagebreak[4]
+	
+	\begin{tabular}{ |p{0.5cm}|p{5cm}|p{5cm}|p{5cm}| } 
+		\hline
+		No. & Test Case & Expected Results & Actual Results \\
+		\hline
+		2.2 & Test build basic function & All words that are adjacent to the start word and not visited in dictionary, are in the list returned by the function. Checks correctness of function with and without keys in visited dictionary. & As expected. \\
+		2.3 & Test build function. & Builds the list of neighboring elements correctly by returning a list of words that satisfy the regex pattern. The function will also not return words that have been seen or are in the current path.  & As expected.\\
+		2.4 & Test populate dictionary function takes a dictionary name. & Reads in dictionary filename and checks the correct number of words present for each word length. & As expected. \\
+		2.5 & Test populate dictionary function takes list of banned words. & Reads in banned words list, and asserts that banned words are not present in the populated lists. & As expected. \\
+		3.0 & \textbf{System tests} &  &  \\
+		3.1 & Test full system using recursive algorithm with mock input and output. & Reads in input and outputs a valid path from start to target word & As expected. \\
+		3.2 & Test full system using breadth-first search with mock input and output. & Reads in required input and outputs the shortest path from start to target word. & As expected. \\
+		\hline
+	\end{tabular}
+	\newpage
+
+		\subsubsection{Version Control History / Log}
+	\begin{tabular}{ | p{2cm} | p{13cm} | }
+		\hline
+		User & Activity \\
+		\hline
+		ZaymonFC & Finished testfile \\ 
+		ZaymonFC & Merge branch 'master' of github.com/ZaymonFC/2810ICT\_Assignment \\ 
+		ZaymonFC & Added diagrams and function description \\ 
+		Natnicha & Added modifications to full system tests. \\ 
+		Natnicha & Added more unit tests. \\ 
+		ZaymonFC & Added system tests and put the main method contents of word ladder into a run function \\ 
+		ZaymonFC & Added build test \\ 
+		ZaymonFC & Merge conflict resolved \\ 
+		ZaymonFC & Finished adding data structures and list of functions. \\ 
+		Natnicha & Edited acceptance test and unit test in document. \\ 
+		Natnicha & Merge branch 'master' of github.com/ZaymonFC/2810ICT\_Assignment \\ 
+		Natnicha & Added unit tests to report. \\ 
+		ZaymonFC & Added tests and added the banned words implementation to the word ladder \\ 
+		ZaymonFC & Removed TestCase \\ 
+		ZaymonFC & Added comments for some test cases in testfile.py \\ 
+		ZaymonFC & Added multiple unit tests for different functions in word\_ladder \\ 
+		ZaymonFC & Added tests for user input in testfile.py \\ 
+		ZaymonFC & Logged work \\ 
+		ZaymonFC & Fixed BFS and implemented a queue data type \\ 
+		ZaymonFC & Added breadth first search for shortest path \\ 
+		Natnicha & Resolved merge conflict \\ 
+		Natnicha & Modified unit test section. \\ 
+		ZaymonFC & Resolved merge conflict \\ 
+		ZaymonFC & Added test skeleton for input validation \\ 
+		Natnicha & Fixed spelling and name errors \\ 
+		\hline 
+	\end{tabular}
+	
+	\begin{tabular}{ | p{2cm} | p{13cm} | }
+		\hline
+		Natnicha & Merge branch 'master' of github.com/ZaymonFC/2810ICT\_Assignment \\ 
+		Natnicha & Added requirement acceptance test \& user instructions. \\ 
+		ZaymonFC & Added section describing all functions in the program \\ 
+		ZaymonFC & Created UML and logical block diagrams, added to report \\ 
+		ZaymonFC & Merge branch 'master' of github.com/ZaymonFC/2810ICT\_Assignment \\ 
+		ZaymonFC & Modified test file and fixed formatting in report \\ 
+		Natnicha & Merge branch 'master' of github.com/ZaymonFC/2810ICT\_Assignment \\ 
+		Natnicha & Modified test table \\ 
+		ZaymonFC & Fixed algorithm to find short paths by limiting reverse progress \\ 
+		ZaymonFC & Merge branch 'master' of github.com/ZaymonFC/2810ICT\_Assignment \\ 
+		ZaymonFC & Improved performance by reversing sorting direction of fitness function \\ 
+		Natnicha & Added version control section \& Unit test tables \\ 
+		Natnicha & Merge branch 'master' of github.com/ZaymonFC/2810ICT\_Assignment \\ 
+		Natnicha & Added unittest cases \\ 
+		ZaymonFC & Refactored word\_ladder.py to validate user input \\ 
+		Natnicha & Modified listing for user requirements \\ 
+		ZaymonFC & Added unittest file and added test ideas to README.md \\ 
+		ZaymonFC & Added .gitignore file and removed postcompile latex objects \\ 
+		ZaymonFC & Merge branch 'master' of github.com/ZaymonFC/2810ICT\_Assignment \\ 
+		ZaymonFC & Modified report preamble to remove redundant packages \\ 
+		Natnicha & Added headings and user requirements \\ 
+		ZaymonFC & Added LaTeX template for assignment documentation \\ 
+		ZaymonFC & Added program files and created project directory structure \\ 
+		ZaymonFC & Initial Commit \\ \hline
+		
+	\end{tabular}
+	
+	\par\vspace{1cm}\small Note: Repository is private to prevent plagiarism. \textbar{} This log was created by using the command \begin{lstlisting} 
+	git log --pretty=format:`%h;%an;%s' > ./log.csv\end{lstlisting}
+	
+\end{document}
