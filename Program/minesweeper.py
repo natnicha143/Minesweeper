@@ -70,34 +70,6 @@ def apply_numeric(neighbours, mines):
     return backing_grid
 
 
-def activate_button(i, j):
-    buttons[i][j].configure(relief=SUNKEN, text=backing_grid[i][j], command='', background='pink')
-    if backing_grid[i][j] == 'B':
-        game_over()
-    if backing_grid[i][j] == 0:
-        cascade_reveal(i, j)
-
-
-def game_over():
-    for i in range(length):
-        for j in range(width): 
-            if backing_grid[i][j] == 'B':
-                buttons[i][j].configure(image=img, height=35, width=38, background='red', command='')
-            else:
-                buttons[i][j].configure(command='')
-    messagebox.showinfo("Mine sweeper", "Game Over!") 
- 
-
-def set_buttons():
-    buttons = list()
-    for row in range(length):
-        buttons.append([])
-        for col in range(width):
-            buttons[row].append(Button(bg="#F597CA", height=2, width=5, command=lambda i=row, j=col: activate_button(i, j)))
-            buttons[row][col].grid(row=row, column=col)
-    return buttons 
-
-
 #look through each adjacent square and if it has no number or mine, add it's adjacent squares 
 def cascade_reveal(i, j):
     reveal = []
@@ -120,6 +92,36 @@ def cascade_reveal(i, j):
                 elif backing_grid[neighbour[0]][neighbour[1]] == 2:
                     buttons[neighbour[0]][neighbour[1]].configure(relief=SUNKEN, text='2', background='pink', state='disabled')
             reveal.remove(cell)
+
+
+def game_over():
+    for i in range(length):
+        for j in range(width): 
+            if backing_grid[i][j] == 'B':
+                buttons[i][j].configure(image=img, height=35, width=38, background='red', command='')
+            else:
+                buttons[i][j].configure(command='')
+    messagebox.showinfo("Mine sweeper", "Game Over!")
+
+# def game_won():
+    
+
+def activate_button(i, j):
+    buttons[i][j].configure(relief=SUNKEN, text=backing_grid[i][j], command='', background='pink')
+    if backing_grid[i][j] == 'B':
+        game_over()
+    if backing_grid[i][j] == 0:
+        cascade_reveal(i, j)
+
+
+def set_buttons():
+    buttons = list()
+    for row in range(length):
+        buttons.append([])
+        for col in range(width):
+            buttons[row].append(Button(bg="#F597CA", height=2, width=5, command=lambda i=row, j=col: activate_button(i, j)))
+            buttons[row][col].grid(row=row, column=col)
+    return buttons 
 
 
 def reset_program():
@@ -147,11 +149,13 @@ elif diff == 3:
 
 size = width * length
 neighbours = populate_game()
-buttons = set_buttons()
 mines = generate_mines()
 backing_grid = apply_numeric(neighbours, mines)
-#~.~.~.~.~.~.~.~
+buttons = set_buttons(frame)
 img = PhotoImage(file="mine.png")
+#~.~.~.~.~.~.~.~
+
+
 #~.~.~.~.~.~.~.~
 root = Tk()
 root.withdraw()
@@ -165,8 +169,8 @@ frame.pack(side=LEFT, expand=1)
 # quitButton = Button(text="Quit", command=quit)
 # resetButton = Button(root, text="Restart", command=reset_program).pack()
 #initialises choice
-levels = [("Beginner", 1), ("Intermediate", 2), ("Advanced", 3)]
+#levels = [("Beginner", 1), ("Intermediate", 2), ("Advanced", 3)]
 
-Label(root, text="""Select a difficulty:""", justify = RIGHT, padx = 20).pack()
+#Label(root, text="""Select a difficulty:""", justify = RIGHT, padx = 20).pack()
 
 root.mainloop()
