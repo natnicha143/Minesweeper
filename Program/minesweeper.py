@@ -74,7 +74,9 @@ def activate_button(i, j):
     buttons[i][j].configure(relief=SUNKEN, text=backing_grid[i][j], command='', background='pink')
     if backing_grid[i][j] == 'B':
         game_over()
-    click_other(i, j)
+    if backing_grid[i][j] == 0:
+        cascade_reveal(i, j)
+
 
 def game_over():
     for i in range(length):
@@ -85,9 +87,6 @@ def game_over():
                 buttons[i][j].configure(command='')
     messagebox.showinfo("Mine sweeper", "Game Over!") 
  
-def click_other(i, j):
-    if backing_grid[i][j] == 0:
-        cascade_reveal(i, j)
 
 def set_buttons():
     buttons = list()
@@ -151,19 +150,15 @@ neighbours = populate_game()
 buttons = set_buttons()
 mines = generate_mines()
 backing_grid = apply_numeric(neighbours, mines)
-
-#keeps reference to object
+#~.~.~.~.~.~.~.~
 img = PhotoImage(file="mine.png")
-# one = PhotoImage(file="one.png")
-# two = PhotoImage(file="two.png")
-# three = PhotoImage(file="three.png")
-
-#GUI 
+#~.~.~.~.~.~.~.~
 root = Tk()
 root.withdraw()
 root.title("Mine sweeper")
-frame = Frame(root, height=100, width=100, bg='pink')
-frame.pack()
+frame = Frame(root, height=400, width=400, bg='black')
+frame.pack(side=LEFT, expand=1)
+
 
 
 
