@@ -74,7 +74,8 @@ def activate_button(i, j):
     buttons[i][j].configure(relief=SUNKEN, text=backing_grid[i][j], command='', background='pink')
     if backing_grid[i][j] == 'B':
         game_over()
-    click_other(i, j)
+    if backing_grid[i][j] == 0:
+        cascade_reveal(i, j)
 
 def game_over():
     for i in range(length):
@@ -84,10 +85,7 @@ def game_over():
             else:
                 buttons[i][j].configure(command='')
     messagebox.showinfo("Mine sweeper", "Game Over!") 
- 
-def click_other(i, j):
-    if backing_grid[i][j] == 0:
-        cascade_reveal(i, j)
+
 
 def set_buttons():
     buttons = list()
@@ -134,7 +132,7 @@ def reset_program():
 print("Beginner/Intermediate/Advanced?: ")
 diff = int(input())
 if diff == 1:
-    mine_percentage = 10
+    mine_percentage = 20
     width = 9
     length = 9
 elif diff == 2:
@@ -169,9 +167,9 @@ frame.pack()
 
 # quitButton = Button(text="Quit", command=quit)
 # resetButton = Button(root, text="Restart", command=reset_program).pack()
-#initialises choice
-levels = [("Beginner", 1), ("Intermediate", 2), ("Advanced", 3)]
 
-Label(root, text="""Select a difficulty:""", justify = RIGHT, padx = 20).pack()
+# levels = [("Beginner", 1), ("Intermediate", 2), ("Advanced", 3)]
+
+# Label(root, text="""Select a difficulty:""", justify = RIGHT, padx = 20).pack()
 
 root.mainloop()
