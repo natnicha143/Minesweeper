@@ -70,7 +70,7 @@
 			\item The state of the board, once the buttons are pressed, are represented by a 'backing grid' which assigns all cells with a number or mine, according to the randomly generated mines and its coordinates.
 			\item The program displays whether a cell has a mine or not by representing it with an image of a mine when pressed and also displaying a message that the game is over.
 		\end{itemize}
-
+		\newline
 		Displaying icons |
 		\begin{itemize}
 		\par
@@ -84,47 +84,139 @@
 		Difficulty |
 		\begin{itemize}
 		\par 
-		\item The user has the ability to select a difficulty: beginner, intermediate or advanced. When a difficulty is 	selected, it resets the board to that chosen difficulty. 
+		\item The user has the ability to select a difficulty: beginner, intermediate or advanced. When a difficulty is 	selected, it resets the board to that chosen difficulty and board dimension associated. 
 		\end{itemize}
 		Options |
 		\begin{itemize}
 		\par 
 		\item The user is able to start the game by selecting a difficulty and not a game mode, the program will default to the basic minesweeper game. 
 		\item Selecting the cross at the top right of the window will exit the program and window. 
-		\item The pause button is identified by the universal word "pause" and will disable the game and stop the timer until pressed again and the game is resumed.
 		\end{itemize}
 			\subsubsection{Prioritized list of on-going requirements}
 			\begin{itemize}
 				\item The user is able to flag a cell that they believe is a mine.
+				\item If all mines are flagged, the game is won.
 				\item The scoring system of the game - the game timer. 
-				\item The different game modes
+				\item The hexagon and colour-based minesweeper.
 			\end{itemize}	
 		
 	
 	\subsection{Product Use Cases}
-		\begin{tabular}{|p{4cm}|p{12cm}|}
+	\subsubsection{Completed}
+	\begin{table}[ht]
+	\begin{tabular}{|p{4cm}|p{12cm}|}
 		\hline
-		No. 1 & Losing \\
+		 & Description \\
 		\hline
-		Use case name & xx \\
-		Brief description & Source word contains number. \\
-		Actor(s) & Target word input contains special character. \\
-		Entry condition & Source word input contains special character. \\
-		Exit condition & Target word input contains number. \\
-		Flow of activities & Source and target words are the same.\\
-		Exception condition(s) & Target word input is of different length to source word.\\
+		Use case name & Game over \\
+		Brief description & The game ends when a mine is uncovered. When the game ends, all ability to interact with the current state of the game will be lost. All the existing mines will uncover, the timer will stop and the score will be set. \\
+		Actors & Player. \\
+		Entry condition & Player must click on a button that uncovers a mine. \\
+		Exit condition & The current game will stop, there will be no further interaction with the current board and the timer will stop. \\
+		Flow of activities & 1. The player uncovers a tile with a hidden mine. \newline 2. The system reveals the tile is a mine. \newline 3. The system reveals all existing mines on the board. \newline 4. The system disables the board state and timer. \newline 5. The system displays a message notifying the player "Game over". \\
+		Exception conditions & The tile is flagged and cannot be uncovered.\\
 		\hline
 	\end{tabular}
+	\end{table}
+
+	\begin{table}[ht]
+	\begin{tabular}{|p{4cm}|p{12cm}|}
+		\hline
+		 & Description \\
+		\hline
+		Use case name & Uncover empty neighbour of tiles. \\
+		Brief description & The player uncovers an empty tile and continues to uncover empty adjacent tiles while the loop condition is satisfied. \\
+		Actors & Player \\
+		Entry condition & Player must click on an empty cell with empty adjacent cells. \\
+		Exit condition & A portion of the board is revealed with empty cells until a number greater than 0 is reached. \\
+		Flow of activities & 1. Player reveals empty cell. \newline 2. System uncovers grid of empty mines until a number is reached. \newline 3. System reveals the first set of adjacent numbers for the empty tiles.\\
+		Exception conditions & If an empty cell does not have any empty neighbouring cells, this will not occur.\\
+		\hline
+	\end{tabular}
+	\end{table}
+
+	\pagebreak
+
+	\begin{table}[ht]
+	\begin{tabular}{|p{4cm}|p{12cm}|}
+		\hline
+		 & Description \\
+		\hline
+		Use case name & Player chooses game difficulty. \\
+		Brief description & The player has three difficulty levels to choose from before starting a new game. \\
+		Actors & Player. \\
+		Entry condition & The program must be executed. \\
+		Exit condition & The dimension of the board is set according to the difficulty chosen and the game is playable. \\
+		Flow of activities & 1. Player runs program. \newline 2. Player chooses difficulty from three given.\\
+		Exception conditions & No exceptions, game will not start without choosing a difficulty.\\
+		\hline
+	\end{tabular}
+	\end{table}
+
+\pagebreak 
+	\subsubsection{Pending}
+	\begin{table}[ht]
+	\begin{tabular}{|p{4cm}|p{12cm}|}
+		\hline
+		 & Description \\
+		\hline
+		Use case name & Player flags a tile \\
+		Brief description & The player flags a tile if it is believed that the tile will uncover a mine. \\
+		Actors & Player. \\
+		Entry condition & Player flags an unrevealed tile (right click). \\
+		Exit condition & The button is no longer clickable until the player unflags it (right click). \\
+		Flow of activities & 1. Player right clicks a tile to flag it \newline 2. The system represents the tile with a flag. \newline 3. The system stops the left click activation for that tile and deems the tile to be disabled. \\
+		Exception conditions & If the tile is already uncovered, it cannot be flagged.\\
+		\hline
+	\end{tabular}
+	\end{table}
+
+	\begin{table}[ht]
+	\begin{tabular}{|p{4cm}|p{12cm}|}
+		\hline
+		 & Description \\
+		\hline
+		Use case name & Game timer \\
+		Brief description & The game timer is the scoring system for the minesweeper game. The shorter the time, the better the score. It begins as soon as the difficulty and game mode is selected for the game. \\
+		Actors & Player. \\
+		Entry condition & Game difficulty and game mode is selected. \\
+		Exit condition & Timer stops when a game is either won or lost. \\
+		Flow of activities & 1. Player starts new game by selecing mode and difficulty \newline 2. System starts timer \newline 3. System stops timer if: game is won or game is lost. \\
+		Exception conditions & Player exits game and the time is lost.\\
+		\hline
+	\end{tabular}
+	\end{table}
+
+	\begin{table}[ht]
+	\begin{tabular}{|p{4cm}|p{12cm}|}
+		\hline
+		& Description \\
+		\hline
+		Use case name & Player resets game. \\
+		Brief description & The player may reset the game when desired otherwise the player is prompt to restart the game once completed. A completed game can either be won or lost. \\
+		Actors & Player. \\
+		Entry condition & The game can be reset anytime the board has been configured. The only entry condition would be starting the game once. \\
+		Exit condition & The game is reset. \\
+		Flow of activities & 1. Player starts new game by selecing mode and difficulty \newline 2. System starts timer \newline 3. System stops timer if: game is won or game is lost. \\
+		Exception conditions & None.\\
+		\hline
+	\end{tabular}
+	\end{table}
+	
+	\pagebreak
 	
 	\subsection{Software Architecture}
-
-	\par 
-	The main programming language used was Python. It is a cross-platform language, being able to run on Windows and Linux. This was one of the main reasons it was chosen. 
+	
+	\par The minesweeper program uses a high level system best described as Model View Controller(MVC). By having an architecture, the program can be split up into three different components which handle different parts of the program. The model component divides the behaviour and data from the view, and can only be changed according to the controller. There is one model referred to as the GameModel. The GameModel includes the information about where the mines are on the board, and assigns each tile its number along with the current state of the game. The view component manages the Graphical User Interface (GUI) of the system. It displays the board according to the updates of the model and information provided by the controller, the controller facilitates actions/data between Model and View. The view class is referred to as GameView. The controller component is what the player/user uses to interact with the game. There are two controller classes: MenuController and ButtonController. The MenuController handles the menu interactions from the user whilst the ButtonController handles the clicking of buttons in the game.
+	\newline
+	\par The MVC architecture supports the separation of concerns design patterns and keeps the code for each concern separate by dividing it into three components. By allowing less overlap in functionality, the software maintians its low coupling. MVC also allows developers to write unit testable code. For smaller programs such as minesweeper, both model classes can be unit tested sufficiently to ensure there are no underlying issues. 
+	
+	\par The main programming language used was Python. It is a cross-platform language, being able to run on Windows and Linux. This was one of the main reasons it was chosen. 
 
 	\pagebreak
 	
 	\subsection{Software Design}
-	\subsubsection{High Level Design - Logical Block Diagram}
+	\subsubsection{}
 	
 	
 	\pagebreak

@@ -1,4 +1,5 @@
-#NATNICHA TITIPHANPONG
+#~.~.~.~NATNICHA TITIPHANPONG~.~.~.~#
+
 import random as rand
 import time
 from tkinter import *
@@ -99,7 +100,7 @@ def set_buttons():
 
 #look through each adjacent square and if it has no number or mine, add it's adjacent squares 
 def cascade_reveal(i, j):
-    reveal = []
+    reveal = list()
     adjacent = neighbours[i, j]
     for neighbour in adjacent:
         if backing_grid[neighbour[0]][neighbour[1]] == 0:
@@ -119,6 +120,36 @@ def cascade_reveal(i, j):
                 elif backing_grid[neighbour[0]][neighbour[1]] == 2:
                     buttons[neighbour[0]][neighbour[1]].configure(relief=SUNKEN, text='2', background='pink', state='disabled')
             reveal.remove(cell)
+
+
+def game_over():
+    for i in range(length):
+        for j in range(width): 
+            if backing_grid[i][j] == 'B':
+                buttons[i][j].configure(image=img, height=35, width=38, background='red', command='')
+            else:
+                buttons[i][j].configure(command='')
+    messagebox.showinfo("Mine sweeper", "Game Over!")
+
+# def game_won():
+    
+
+def activate_button(i, j):
+    buttons[i][j].configure(relief=SUNKEN, text=backing_grid[i][j], command='', background='pink')
+    if backing_grid[i][j] == 'B':
+        game_over()
+    if backing_grid[i][j] == 0:
+        cascade_reveal(i, j)
+
+
+def set_buttons():
+    buttons = list()
+    for row in range(length):
+        buttons.append([])
+        for col in range(width):
+            buttons[row].append(Button(bg="#F597CA", height=2, width=5, command=lambda i=row, j=col: activate_button(i, j)))
+            buttons[row][col].grid(row=row, column=col)
+    return buttons 
 
 
 def reset_program():
@@ -146,30 +177,31 @@ elif diff == 3:
 
 size = width * length
 neighbours = populate_game()
-buttons = set_buttons()
 mines = generate_mines()
 backing_grid = apply_numeric(neighbours, mines)
-
-#keeps reference to object
+buttons = set_buttons(
 img = PhotoImage(file="mine.png")
-# one = PhotoImage(file="one.png")
-# two = PhotoImage(file="two.png")
-# three = PhotoImage(file="three.png")
-
-#GUI 
-root = Tk()
-root.withdraw()
-root.title("Mine sweeper")
-frame = Frame(root, height=100, width=100, bg='pink')
-frame.pack()
+#~.~.~.~.~.~.~.~
 
 
+#~.~.~.~.~.~.~.~
+master = Tk()
+master.title("Mine sweeper")
+frame = Frame(master, height=400, width=400, bg='black')
+frame.pack(side=LEFT, expand=1)
 
 # quitButton = Button(text="Quit", command=quit)
 # resetButton = Button(root, text="Restart", command=reset_program).pack()
+<<<<<<< HEAD
 
 # levels = [("Beginner", 1), ("Intermediate", 2), ("Advanced", 3)]
 
 # Label(root, text="""Select a difficulty:""", justify = RIGHT, padx = 20).pack()
+=======
+#initialises choice
+#levels = [("Beginner", 1), ("Intermediate", 2), ("Advanced", 3)]
 
-root.mainloop()
+#Label(root, text="""Select a difficulty:""", justify = RIGHT, padx = 20).pack()
+>>>>>>> 33b0c2c18d0036d6eb3140244ca8fbfcd07b5afd
+
+master.mainloop()
