@@ -13,7 +13,7 @@ def main_window():
     master.resizable(width=False, height=False)
     return master
 
-def images():
+def create_image():
     mine = PhotoImage(file="mine.png")
     flag = PhotoImage(file="flag.png")
     return(mine, flag)
@@ -28,9 +28,9 @@ def create_board(master, grid, mine, flag):
       
         def button_bindings(event, i, j):
             if event.type == 1:
-                bc.left_click(i, j)
+                bc.left_click(grid, board, i, j)
             elif event.type == 3:
-                bc.right_click(i, j)
+                bc.right_click(grid, board, i, j)
             else:
                 raise Exception('Invalid event.')
         b.bind("<Button-1>", button_bindings)
@@ -46,7 +46,7 @@ def create_board(master, grid, mine, flag):
 
 
 def make_top_frame(window, grid, buttons):
-    top_frame = Frame(window, borderwidth=2, height=40, relief=GROOVE)
+    top_frame = Frame(window, borderwidth=2, height=35, relief=GROOVE)
     top_frame.pack(padx=0, pady=0, sider=TOP, fill="x")
     for i in range(4):
         top_frame.columnconfigure(i, weight=1)
@@ -84,3 +84,7 @@ def time_counter(top_frame):
     time_counter = Label(top_frame, height=1, width=4, bg='pink', textvariable=time_counter_str)
     time_counter.grid(row=0, column=4, padx=5, sticky=E)
 
+master = main_window()
+grid = game.Grid()
+mine, flag = create_image()
+board = create_board(master, grid, mine, flag)

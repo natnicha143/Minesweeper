@@ -17,7 +17,7 @@ def init_game():
     print("Beginner/Intermediate/Advanced?: ")
     diff = int(input())
     if diff == 1:
-        m = 10
+        mines = 10
         width = 9
         height = 9
     elif diff == 2:
