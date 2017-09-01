@@ -131,17 +131,6 @@ def game_over():
                 buttons[i][j].configure(command='')
     messagebox.showinfo("Mine sweeper", "Game Over!")
 
-# def game_won():
-    
-
-def activate_button(i, j):
-    buttons[i][j].configure(relief=SUNKEN, text=backing_grid[i][j], command='', background='pink')
-    if backing_grid[i][j] == 'B':
-        game_over()
-    if backing_grid[i][j] == 0:
-        cascade_reveal(i, j)
-
-
 def set_buttons():
     buttons = list()
     for row in range(length):
@@ -179,7 +168,7 @@ size = width * length
 neighbours = populate_game()
 mines = generate_mines()
 backing_grid = apply_numeric(neighbours, mines)
-buttons = set_buttons(
+buttons = set_buttons()
 img = PhotoImage(file="mine.png")
 #~.~.~.~.~.~.~.~
 
@@ -192,16 +181,9 @@ frame.pack(side=LEFT, expand=1)
 
 # quitButton = Button(text="Quit", command=quit)
 # resetButton = Button(root, text="Restart", command=reset_program).pack()
-<<<<<<< HEAD
 
 # levels = [("Beginner", 1), ("Intermediate", 2), ("Advanced", 3)]
 
 # Label(root, text="""Select a difficulty:""", justify = RIGHT, padx = 20).pack()
-=======
-#initialises choice
-#levels = [("Beginner", 1), ("Intermediate", 2), ("Advanced", 3)]
-
-#Label(root, text="""Select a difficulty:""", justify = RIGHT, padx = 20).pack()
->>>>>>> 33b0c2c18d0036d6eb3140244ca8fbfcd07b5afd
 
 master.mainloop()

@@ -52,13 +52,12 @@
 \date{\today}
 
 \begin{document}
-	
-	\begin{titlepage}
-		\maketitle
-	\end{titlepage}
+\begin{titlepage}
+	\maketitle 
+\end{titlepage}
 	\tableofcontents
 	\pagebreak
-	\section{Milestone 2}
+	\section{Milestone 2} 
 	\subsection{Requirements}
 	\par The current  version of minesweeper successfully meets the requirements of the traditional minesweeper game however it is still yet to implement the hexagon and colour-based minesweeper  modes successfully. 
 		\subsubsection{List of completed requirements}
@@ -216,47 +215,16 @@
 	\pagebreak
 	
 	\subsection{Software Design}
-	\subsubsection{}
+	\subsubsection{Design Goals}
 	
 	
 	\pagebreak
 	
 	
 	\subsection{Testing}
+	\par A software fault is a common occurence, a programmer makes an error, which results in a defect in the source code. Without testing with the intent for finding such  bugs, the program will produce the wrong outcome or results and cause it to fail. As soon as the program was executable, testing was conducted. The testing of Mine Sweeper took an agile approach as programming and testing needed to be done concurrently. Unit tests were written to test separate functions of the program and as expected, some tests failed initially. As the development of the program progressed, the written code passed incrementally larger portions of the test suites. The test suites are updated as new problems are found with the program. The unit tests are maintained along with the source code for Mine Sweeper. The goal of concurrently performing tests and writing the program ensures continuous integration. This also helps to meet the specified requirements of the software, makes sure the program responds accordingly to all kinds of user interaction and is sufficiently usable. This white-box style of software testing ensures that specific functions work as expected, especially for small pieces of software. Unit testing does not guarantee the functionality of the software alone however, it does ensure the building blocks of the software work independently from each other.
 	
 	
-	\begin{tabular}{ |p{0.5cm}|p{5cm}|p{5cm}|p{5cm}| }
-		\hline
-		No. & Test Case & Expected Results & Actual Results \\
-		\hline
-		1.0 & \textbf{Test User Input} &  & \\
-		1.1 & Source word contains number. & Program displays error message: ``Source or target input words cannot contain numbers or special characters" and system exits. & As expected.\\
-		1.2 & Target word input contains special character. & Program displays error message: ``Input words cannot contain numbers or special characters" and system exits. & As expected. \\
-		1.3 & Source word input contains special character. & Program displays error message: ``Input words cannot contain numbers or special characters" and system exits. & As expected. \\
-		1.4 & Target word input contains number. & Program displays error message: ``Input words cannot contain numbers or special characters and system exits." & As expected. \\
-		1.5 & Source and target words are the same. & System prints error: ``Start and target words cannot be the same." & As expected. \\
-		1.6 & Target word input is of different length to source word. & System prints error message: ``Start and target words must be the same length." & As expected. \\
-		1.7 & Check whether init function returns source and target word after input is validated. & Function returns source word as the first element in the list and target as second. & As expected.\\
-		2.0 & \textbf{Test Helper Functions} &  &  \\
-		2.1 & Test same function and whether it returns the correct number of identical letters. & Test case returns true if same function returns 4 for `lead' \& `lead', 3 for `lead' \& `mead' and false if `hello' \& `there' equals 0. & As expected. \\
-		\hline
-	\end{tabular}
-	
-	\pagebreak[4]
-	
-	\begin{tabular}{ |p{0.5cm}|p{5cm}|p{5cm}|p{5cm}| } 
-		\hline
-		No. & Test Case & Expected Results & Actual Results \\
-		\hline
-		2.2 & Test build basic function & All words that are adjacent to the start word and not visited in dictionary, are in the list returned by the function. Checks correctness of function with and without keys in visited dictionary. & As expected. \\
-		2.3 & Test build function. & Builds the list of neighboring elements correctly by returning a list of words that satisfy the regex pattern. The function will also not return words that have been seen or are in the current path.  & As expected.\\
-		2.4 & Test populate dictionary function takes a dictionary name. & Reads in dictionary filename and checks the correct number of words present for each word length. & As expected. \\
-		2.5 & Test populate dictionary function takes list of banned words. & Reads in banned words list, and asserts that banned words are not present in the populated lists. & As expected. \\
-		3.0 & \textbf{System tests} &  &  \\
-		3.1 & Test full system using recursive algorithm with mock input and output. & Reads in input and outputs a valid path from start to target word & As expected. \\
-		3.2 & Test full system using breadth-first search with mock input and output. & Reads in required input and outputs the shortest path from start to target word. & As expected. \\
-		\hline
-	\end{tabular}
 	\newpage
 
 		\subsubsection{Version Control History / Log}
