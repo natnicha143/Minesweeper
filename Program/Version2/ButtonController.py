@@ -5,65 +5,70 @@ import tkinter as tk
 import tkinter.messagebox as tkmsg
 import sys
 import time
-import GameModel as gm
-
-def left_handler(grid, board, i, j, mine):
-    """ Called when left click on the (i, j) cell """
-    if board[i][j]["image"] == "" and not grid.tab[i][j].revealed:
-        board[i][j]["state"] = "disabled"
-        board[i][j]["relief"] = tk.SUNKEN
-        if grid.tab[i][j].is_bomb:
-            board[i][j]["image"] = mine
-            board[i][j]["state"] = "normal"
-            end_game(False, grid, board)
-        else:
-            grid.tab[i][j].revealed = True
-            gm.SQUARES_REVEALED += 1
-            if grid.tab[i][j].bombs_around != 0:
-                board[i][j]["text"] = grid.tab[i][j].bombs_around
-            else:
-                for (x, y) in gm.neighbours(i, j):
-                    left_handler(grid, board, x, y, mine)
-            if gm.SQUARES_REVEALED == (gm.WIDTH * gm.HEIGHT - gm.BOMBS):
-                end_game(True, grid, board)
+import MineSweeperModel as model
 
 
-def right_handler(grid, board, i, j, flag):
-    """ Called when right click on the (i, j) cell """
-    if not grid.tab[i][j].revealed:
-        if board[i][j]["image"] == "":
-            board[i][j]["image"] = flag
-            board[i][j]["state"] = "normal"
-            gm.BOMBS_LEFT -= 1
-        else:
+class ButtonController():
+    def __init__(self, model):
+        self.model = model
+
+    def left_handler(self, grid, board, i, j, mine):
+        """ Called when left click on the (i, j) cell """
+        if board[i][j]["image"] == "" and not grid.buttons[i][j].revealed:
             board[i][j]["state"] = "disabled"
-            board[i][j]["image"] = ""
-            gm.BOMBS_LEFT += 1
+            board[i][j]["relief"] = tk.SUNKEN
+            if grid.buttons[i][j].is_mine:
+                board[i][j]["image"] = mine
+                board[i][j]["state"] = "normal"
+                self.end_game(False, grid, board)
+            else:
+                grid.buttons[i][j].revealed = True
+                model.TILES_REVEALED += 1
+                if grid.buttons[i][j].neighbour_mines != 0:
+                    board[i][j]["text"] = grid.buttons[i][j].neighbour_mines
+                else:
+                    for (x, y) in model.neighbours[i, j]:
+                        self.left_handler(grid, board, x, y, mine)
+                if model.TILES_REVEALED == (model.WIDTH * model.HEIGHT - model.MINES):
+                    self.end_game(True, grid, board)
 
 
-def end_game(win, grid, board):
-    if win:
-        title = "You won !"
-        msg = "Good job. Play again ?"
-    else:
-        title = "You lost..."
-        msg = "Try again ?"
-    ans = tkmsg.askyesno(title, msg)
-    if ans:
-        start_new_game(grid, board)
-    else:
-        sys.exit()
+    def right_handler(self, grid, board, i, j, flag):
+        """ Called when right click on the (i, j) cell """
+        if not grid.buttons[i][j].revealed:
+            if board[i][j]["image"] == "":
+                board[i][j]["image"] = flag
+                board[i][j]["state"] = "normal"
+                model.REMAINING_MINES -= 1
+            else:
+                board[i][j]["state"] = "disabled"
+                board[i][j]["image"] = ""
+                model.REMAINING_MINES += 1
 
 
-def start_new_game(grid, board):
-    for x in range(gm.HEIGHT):
-        for y in range(gm.WIDTH):
-            grid.tab[x][y].reset()
-            board[x][y]["image"] = ""
-            board[x][y]["text"] = ""
-            board[x][y]["state"] = tk.DISABLED
-            board[x][y]["relief"] = tk.RAISED
-    grid.add_bombs()
-    gm.SQUARES_REVEALED = 0
-    gm.BOMBS_LEFT = gm.BOMBS
-    gm.INIT_TIME = time.time()
+    def end_game(self, win, grid, board):
+        if win:
+            title = "You won !"
+            msg = "Good job. Play again ?"
+        else:
+            title = "You lost..."
+            msg = "Try again ?"
+        ans = tkmsg.askyesno(title, msg)
+        if ans:
+            self.start_new_game(grid, board)
+        else:
+            sys.exit()
+
+
+    def start_new_game(self, grid, board):
+        for x in range(model.HEIGHT):
+            for y in range(model.WIDTH):
+                grid.buttons[x][y].reset()
+                board[x][y]["image"] = ""
+                board[x][y]["text"] = ""
+                board[x][y]["state"] = tk.DISABLED
+                board[x][y]["relief"] = tk.RAISED
+        grid.generate_mines()
+        model.TILES_REVEALED = 0
+        model.REMAINING_MINES = model.MINES
+        model.INIT_TIME = time.time()

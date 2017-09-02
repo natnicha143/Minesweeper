@@ -47,7 +47,7 @@
 
 \lstset{style=mystyle}
 
-\title{2805ICT, Milestone 2: Progress Report}
+\title{2805ICT, Milestone 2: Progress Report \& UML}
 \author{Natnicha Titiphanpong, s2940970}%\thanks{}}
 \date{\today}
 
@@ -57,7 +57,7 @@
 \end{titlepage}
 	\tableofcontents
 	\pagebreak
-	\section{Milestone 2} 
+	\section{Progress Report} 
 	\subsection{Requirements}
 	\par The current  version of minesweeper successfully meets the requirements of the traditional minesweeper game however it is still yet to implement the hexagon and colour-based minesweeper  modes successfully. 
 		\subsubsection{List of completed requirements}
@@ -206,7 +206,7 @@
 	
 	\subsection{Software Architecture}
 	
-	\par The minesweeper program uses a high level system best described as Model View Controller(MVC). By having an architecture, the program can be split up into three different components which handle different parts of the program. The model component divides the behaviour and data from the view, and can only be changed according to the controller. There is one model referred to as the GameModel. The GameModel includes the information about where the mines are on the board, and assigns each tile its number along with the current state of the game. The view component manages the Graphical User Interface (GUI) of the system. It displays the board according to the updates of the model and information provided by the controller, the controller facilitates actions/data between Model and View. The view class is referred to as GameView. The controller component is what the player/user uses to interact with the game. There are two controller classes: MenuController and ButtonController. The MenuController handles the menu interactions from the user whilst the ButtonController handles the clicking of buttons in the game.
+	\par The minesweeper program uses a high level system best described as Model View Controller(MVC). By having an architecture, the program can be split up into three different components which handle different parts of the program. The model component divides the behaviour and data from the view, and can only be changed according to the controller. The MineSweeperModel includes the position of where the mines are on the board, and assigns each tile its number along with the current state of the game. The view component manages the Graphical User Interface (GUI) of the system. It displays the board according to the updates of the model and information provided by the controller, the controller facilitates actions/data between Model and View. There will be three views, each for the type of game mode. The first view is referred to as SquareView, this uses a grid layout manager in Tkinter and its button components whereas the HexagonView will need to use the Canvas tool as the buttons cannot be hexagon shaped. The controller component is what the player/user uses to interact with the game. There is one controller component: ButtonController. The ButtonController handles the actions and configurations of the buttons in the game, as every user clickable component is a button. 
 	\newline
 	\par The MVC architecture supports the separation of concerns design patterns and keeps the code for each concern separate by dividing it into three components. By allowing less overlap in functionality, the software maintians its low coupling. MVC also allows developers to write unit testable code. For smaller programs such as minesweeper, both model classes can be unit tested sufficiently to ensure there are no underlying issues. The main programming language used was Python. It is a cross-platform language, being able to run on Windows and Linux. This was one of the main reasons it was chosen. 
 
@@ -288,4 +288,18 @@
 	\par\vspace{1cm}\small Note: Repository is private to prevent plagiarism. \textbar{} This log was created by using the command \begin{lstlisting} 
 	git log --pretty=format:`%h;%an;%s' > ./log.csv\end{lstlisting}
 	
+	\pagebreak
+	
+	\section{UML}
+	
+	\subsection{Dynamic Modelling}
+	\subsubsection{Interaction diagrams}
+	
+	
+	\subsubsection{State-based diagrams}
+	
+	
+	\subsection{Structural Modelling}
+	
+	\subsection{Software Patterns}
 \end{document}

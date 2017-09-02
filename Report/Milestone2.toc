@@ -1,4 +1,4 @@
-\contentsline {section}{\numberline {1}Milestone 2}{2}
+\contentsline {section}{\numberline {1}Progress Report}{2}
 \contentsline {subsection}{\numberline {1.1}Requirements}{2}
 \contentsline {subsubsection}{List of completed requirements}{2}
 \contentsline {subsubsection}{Prioritized list of on-going requirements}{3}
@@ -10,3 +10,9 @@
 \contentsline {subsubsection}{Design Goals}{7}
 \contentsline {subsection}{\numberline {1.5}Testing}{7}
 \contentsline {subsubsection}{Version Control History / Log}{8}
+\contentsline {section}{\numberline {2}UML}{10}
+\contentsline {subsection}{\numberline {2.1}Dynamic Modelling}{10}
+\contentsline {subsubsection}{Interaction diagrams}{10}
+\contentsline {subsubsection}{State-based diagrams}{10}
+\contentsline {subsection}{\numberline {2.2}Structural Modelling}{10}
+\contentsline {subsection}{\numberline {2.3}Software Patterns}{10}

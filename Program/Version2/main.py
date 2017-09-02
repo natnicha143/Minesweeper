@@ -3,15 +3,16 @@ import sys
 import MineSweeperModel as ms
 import GameView
 import GameModel as gm
+import ButtonController as ButtonController
 from tkinter import *
-# Set parameters if given ######################################################
+#Main handles creating GUI, initialises data and calls mainloop
 gm.set_parameters(sys.argv[1:])
 
-# Initialisation of the data ###################################################
 GRID = ms.Grid()
-GRID.add_bombs()
+GRID.generate_mines()
 
-# Creation of the GUI ##########################################################
+self.controller = ButtonController
+
 window = GameView.create_main_window()
 flag, mine = GameView.create_images()
 BOARD = GameView.create_board(window, GRID, flag, mine)
