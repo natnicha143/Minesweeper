@@ -1,6 +1,3 @@
-#! /usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 import tkinter as tk
 import tkinter.messagebox as tkmsg
 import sys
@@ -11,6 +8,7 @@ import MineSweeperModel as model
 class ButtonController():
     def __init__(self, model):
         self.model = model
+        self.neighbours = model.get_neighbours()
 
     def left_handler(self, grid, board, i, j, mine):
         """ Called when left click on the (i, j) cell """
@@ -27,7 +25,7 @@ class ButtonController():
                 if grid.buttons[i][j].neighbour_mines != 0:
                     board[i][j]["text"] = grid.buttons[i][j].neighbour_mines
                 else:
-                    for (x, y) in model.neighbours[i, j]:
+                    for (x, y) in self.neighbours[i, j]:
                         self.left_handler(grid, board, x, y, mine)
                 if model.TILES_REVEALED == (model.WIDTH * model.HEIGHT - model.MINES):
                     self.end_game(True, grid, board)

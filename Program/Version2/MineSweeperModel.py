@@ -1,8 +1,8 @@
 import random as rand
 import sys
-from tkinter import *
-import GameView
 import time
+from tkinter import *
+
 
 HEIGHT = 10
 WIDTH = 15
@@ -16,7 +16,7 @@ INIT_TIME = time.time()
 #Tile class has attributes: coordinates, whether it is a mine, whether it is revealed and if there are neighbouring mines.
 #A tile can be reset and revealed
 class Tile():
-    """ A Tile of the game """
+    #A Tile of the game 
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -29,13 +29,14 @@ class Tile():
 
     def reveal(self):
         self.revealed = True
-        return (self.is_mine, self.neighbour_mines)
+        return self.is_mine, self.neighbour_mines
 
-#A grid of tiles
+
 class Grid():
-    """ A game grid, containing Tiles """
+    # A game grid, containing Tiles
     def __init__(self):
         self.buttons = [[Tile(i, j) for i in range(WIDTH)] for j in range(HEIGHT)]
+        self.neighbours = self.populate_game()
 
     def reset(self):
         for line in self.buttons:
@@ -73,40 +74,16 @@ class Grid():
                     adjacent.append([row+1, col+1])
                 neighbours[row, col] = adjacent
         return neighbours
-
+    
+    def get_neighbours(self):
+        return self.neighbours
+    
     def generate_mines(self):
         mines = rand.sample([(i, j) for j in range (WIDTH) for i in range(HEIGHT)], MINES)
         for i, j in mines:
             self.buttons[i][j].is_mine = True
-            for i2, j2 in neighbours[i, j]:
+            for i2, j2 in self.neighbours[i, j]:
                 self.buttons[i2][j2].neighbour_mines += 1
 
-    def set_parameters(self, argv):
-        # if there's not 3 args
-        if len(argv) != 3:
-            if len(argv) != 0:
-                print("Warning : Invalid parameters")
-                print("Need 3 arguments (height, WIDTH, mines)")
-            return
 
-        # if they aren't ints
-        try:
-            height = int(argv[0])
-            WIDTH = int(argv[1])
-            mines = int(argv[2])
-        except ValueError:
-            print("Warning : Invalid parameters")
-            print("Arguments aren't ints")
-            return
-
-        # if constraints aren't respected
-        if  height <= 0 or WIDTH <= 0 or mines <= 0 or mines >= height*WIDTH:
-            print("Warning : Invalid parameters")
-            print("Can't create game with these values")
-            return
-
-        HEIGHT = height
-        WIDTH = WIDTH
-        MINES = mines
-        REMAINING_MINES = mines
 
