@@ -40,7 +40,7 @@ class GameView:
 
     # def set_parameters(self, argv):
         
-    def end_game(self, win, grid, board):
+    def end_game(self, win):
         if win:
             title = "You won! Hooray!"
             msg = "Good job! Play again?"
@@ -49,7 +49,7 @@ class GameView:
             msg = "Play again?"
         ans = tkmsg.askyesno(title, msg)
         if ans:
-            self.start_new_game(grid, board)
+            self.start_new_game(self.backing_grid, self.board)
         else:
             sys.exit()
 

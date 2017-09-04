@@ -32,7 +32,7 @@ class Grid:
         self.tiles_revealed = 0
         self.init_time = time.time()
         self.neighbours = self.populate_game()
-        self.backing_grid = self.create_grid()
+        self.backing_grid = self.get_grid()
         
     def reset(self):
         for line in self.backing_grid:

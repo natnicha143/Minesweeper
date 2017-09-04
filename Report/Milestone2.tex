@@ -69,7 +69,7 @@
 			\item The state of the board, once the buttons are pressed, are represented by a 'backing grid' which assigns all cells with a number or mine, according to the randomly generated mines and its coordinates.
 			\item The program displays whether a cell has a mine or not by representing it with an image of a mine when pressed and also displaying a message that the game is over.
 		\end{itemize}
-f		\newline
+		\newline
 		Displaying icons |
 		\begin{itemize}
 		\par
@@ -207,31 +207,39 @@ f		\newline
 	
 	\par The minesweeper program is designed based on a high level system best described as Model View Controller(MVC). By having an MVC architecture, the program can be split up into three different components which handle different parts of the program. The model component divides the behaviour and data from the view, and can only be changed according to the controller. The GameModel includes the position of where the mines are on the board, and assigns each tile its number along with the current state of the game. The view component manages the Graphical User Interface (GUI) of the system. It displays the board according to the updates of the model and information provided by the controller, the controller facilitates actions/data between Model and View. There will be three views, each for the type of game mode. The first view is referred to as GameView, this uses a grid layout manager in Tkinter and its button components whereas the HexagonView will need to use the Canvas tool as the buttons cannot be hexagon shaped. The controller component is what the player/user uses to interact with the game. There is one controller component: GameController. The GameController handles the actions and configurations of the buttons in the game, and in future, the canvas as well.
 	\newline \par 
-	The MVC architecture supports the separation of concerns design patterns and keeps the code for each concern separate by dividing it into three components. By allowing less overlap in functionality, the software maintains its low coupling. MVC also allows developers to write unit testable code. For smaller programs such as minesweeper, both model classes can be unit tested sufficiently to ensure there are no underlying issues. The main programming language used was Python. It is a cross-platform language, being able to run on Windows and Linux. This was one of the main reasons it was chosen. 
+	The MVC architecture supports the separation of concerns design patterns and keeps the code for each concern separate by dividing it into three components. By allowing less overlap in functionality, the software maintains its low coupling. MVC also allows developers to write unit testable code. For smaller programs such as minesweeper, both model classes can be unit tested sufficiently to ensure there are no underlying issues. The main programming language used was Python. It is a cross-platform language, being able to run on Windows and Linux. The tkinter module is installed with the installation of Python, so it was ready to use.  
 
 	\pagebreak
 	
 	\subsection{Software Design}
 	\subsubsection{Design Goals}
-	\par The goal of the project is to not only produce the requirements of the software but also design the software in a way that will ensure the code is reusable. Each class is a blueprint of the object it creates, this infers that the software should have high cohesion, it should only have methods relating to the intention of the class. The program is split into MVC, it is intentionally done this way to make each class purposeful and independent of another. Another way to refer to this is coupling. The goal of good software design is to lower coupling so that when a part of software needs to be changed, it does not effect the other. If the layout of the game needs to be modified, it doesn't affect the action of the buttons and certainly not the data stored behind them. 
-	
-	\subsubsection{Dynamic Modelling}
+	\par The goal of the project is to not only produce the requirements of the software but also design the software in a way that will ensure the code is reusable. Each class is a blueprint of the object it creates, this infers that the software should have high cohesion, it should only have methods relating to the intention of the class. The program is split into MVC, it is intentionally done this way to make each class purposeful and independent of another. Another way to refer to this is coupling. The goal of good software design is to lower coupling so that when a part of software needs to be changed, it does not effect the other. If the layout of the game needs to be modified, there are no unwanted side effects of that change. The aim of the design is to also increase modularity of the software so that particular functions have a clear, sole purpose. This purpose helps separate the functions that are not responsible for doing certain things within the program, also know as encapsulation. 
+
+
+	\subsubsection{Structural Modelling}
+	\begin{figure}[h]
+		\lstinputlisting[language=Python, firstline=1, lastline=22]{pseudo.txt}
+		\caption{MineSweeper main class}
+	\end{figure}
+	\begin{figure}[!h]
+	\centering
+	\includegraphics[scale=0.6]{UML}
+	\caption{UML diagram for the Python implementation of MineSweeper}
+\end{figure}
+
+\par The MineSweeper class is the main class that executes the program. This class instantiates the objects of all the classes within the Mine sweeper. 
+\pagebreak
+	\begin{figure}[h]
+	\lstinputlisting[language=Python, firstline=30, lastline=39]{pseudo.txt}
+	\caption{Grid Class in model component}
+\end{figure}
+	\par The model class: Grid creates the back grid of the game, the dictionary of neighbours and the mines, within the parameter settings defined in the constructor.  
 	
 	\begin{figure}[h]
-		\lstinputlisting[language=Python, firstline=14, lastline=25]{pseudo.txt}
-		\caption{}
-	\end{figure}
-\pagebreak
-	\subsubsection{Structural Modelling}
-	\begin{figure}[!h]
-		\centering
-		\includegraphics[scale=0.6]{UML}
-		\caption{UML diagram for the Python implementation of MineSweeper}
-	\end{figure}
-\pagebreak
-	
-	\subsubsection{Software Patterns}
-	
+	\lstinputlisting[language=Python, firstline=24, lastline=28]{pseudo.txt}
+	\caption{GameController class in controller component}
+\end{figure}
+	\par GameController references model class: Grid. Object is created in MineSweeper main.
 	
 	\subsection{Testing}
 	\par A software fault is a common occurence, a programmer makes an error, which results in a defect in the source code. Without testing with the intent for finding such  bugs, the program will produce the wrong outcome or results and cause it to fail. As soon as the program was executable, testing was conducted. The testing of Mine Sweeper took an agile approach as programming and testing needed to be done concurrently. The unittest module was imported in to the test file and unit tests were written to test separate functions of the program and as expected, some tests failed initially. Firstly, the populating of the game was tested - whether the information stored in the dictionary of neighbours was relative to the position of the mines. As the development of the program progressed, the written code passed incrementally larger portions of the test suites. The test suites are updated as new problems are found with the program. The unit tests are maintained along with the source code for Mine Sweeper. The goal of concurrently performing tests and writing the program ensures continuous integration. This also helps to meet the specified requirements of the software, makes sure the program responds accordingly to all kinds of user interaction and is sufficiently usable. This white-box style of software testing ensures that specific functions work as expected, especially for small pieces of software. Unit testing does not guarantee the functionality of the software alone however, it does ensure the building blocks of the software work independently from each other.
@@ -240,69 +248,39 @@ f		\newline
 	\newpage
 
 		\subsubsection{Version Control History / Log}
-	\begin{tabular}{ | p{2cm} | p{13cm} | }
+	\begin{tabular}{ | p{2cm} | p{2cm} | p{11cm} | }
 		\hline
-		User & Activity \\
+		Date & User & Activity \\
 		\hline
-		ZaymonFC & Finished testfile \\ 
-		ZaymonFC & Merge branch 'master' of github.com/ZaymonFC/2810ICT\_Assignment \\ 
-		ZaymonFC & Added diagrams and function description \\ 
-		Natnicha & Added modifications to full system tests. \\ 
-		Natnicha & Added more unit tests. \\ 
-		ZaymonFC & Added system tests and put the main method contents of word ladder into a run function \\ 
-		ZaymonFC & Added build test \\ 
-		ZaymonFC & Merge conflict resolved \\ 
-		ZaymonFC & Finished adding data structures and list of functions. \\ 
-		Natnicha & Edited acceptance test and unit test in document. \\ 
-		Natnicha & Merge branch 'master' of github.com/ZaymonFC/2810ICT\_Assignment \\ 
-		Natnicha & Added unit tests to report. \\ 
-		ZaymonFC & Added tests and added the banned words implementation to the word ladder \\ 
-		ZaymonFC & Removed TestCase \\ 
-		ZaymonFC & Added comments for some test cases in testfile.py \\ 
-		ZaymonFC & Added multiple unit tests for different functions in word\_ladder \\ 
-		ZaymonFC & Added tests for user input in testfile.py \\ 
-		ZaymonFC & Logged work \\ 
-		ZaymonFC & Fixed BFS and implemented a queue data type \\ 
-		ZaymonFC & Added breadth first search for shortest path \\ 
-		Natnicha & Resolved merge conflict \\ 
-		Natnicha & Modified unit test section. \\ 
-		ZaymonFC & Resolved merge conflict \\ 
-		ZaymonFC & Added test skeleton for input validation \\ 
-		Natnicha & Fixed spelling and name errors \\ 
-		\hline 
+		Sep 4, 2017 & Natnicha & Added diagrams to Report \\ 
+		Sep 3, 2017 & Natnicha & Separated create board function in three separate functions for low coupling, removed nested functions. \\ 
+		Sep 2, 2017 & Natnicha & Added UML section to report. Put MV files into classes. \\ 
+		Sep 1, 2017 & Natnicha & Added timer and reset button functions to Program. \\ 
+		Sep 1, 2017 & Natnicha & Added test section to Report. \\ 
+		Aug 31, 2017 & Natnicha & Modified test file and fixed formatting in report. Restructured program into MVC architecture. \\ 
+		Aug 31, 2017 & Natnicha & Merging conflict resolved. \\
+		Aug 31, 2017 & Natnicha & Merging files \\ 
+		Aug 30, 2017 & Natnicha & Modified Software Architecture section in Report. \\ 
+		Aug 30, 2017 & Natnicha & Completed use case progression and added software architecture section to Report. \\ 
+		Aug 30, 2017 & Natnicha & Added more use cases. \\ 
+		Aug 30, 2017 & Natnicha & Modified activation button function to handle functionality depending on the backing grid \\ 
+		Aug 29, 2017 & Natnicha & Added game end function to handle the program when the game is over. \\ 
+		Aug 29, 2017 &Natnicha & Fixed cascading reveal to display empty cells and cells adjacent to. \\ 
+		Aug 29, 2017 & Natnicha & Added colour scheme to GUI minesweeper.py \\
+		Aug 26, 2017 & Natnicha & Added images to buttons for GUI. \\ 
+		\hline
 	\end{tabular}
 	
-	\begin{tabular}{ | p{2cm} | p{13cm} | }
-		\hline
-		Natnicha & Merge branch 'master' of github.com/ZaymonFC/2810ICT\_Assignment \\ 
-		Natnicha & Added requirement acceptance test \& user instructions. \\ 
-		ZaymonFC & Added section describing all functions in the program \\ 
-		ZaymonFC & Created UML and logical block diagrams, added to report \\ 
-		ZaymonFC & Merge branch 'master' of github.com/ZaymonFC/2810ICT\_Assignment \\ 
-		ZaymonFC & Modified test file and fixed formatting in report \\ 
-		Natnicha & Merge branch 'master' of github.com/ZaymonFC/2810ICT\_Assignment \\ 
-		Natnicha & Modified test table \\ 
-		ZaymonFC & Fixed algorithm to find short paths by limiting reverse progress \\ 
-		ZaymonFC & Merge branch 'master' of github.com/ZaymonFC/2810ICT\_Assignment \\ 
-		ZaymonFC & Improved performance by reversing sorting direction of fitness function \\ 
-		Natnicha & Added version control section \& Unit test tables \\ 
-		Natnicha & Merge branch 'master' of github.com/ZaymonFC/2810ICT\_Assignment \\ 
-		Natnicha & Added unittest cases \\ 
-		ZaymonFC & Refactored word\_ladder.py to validate user input \\ 
-		Natnicha & Modified listing for user requirements \\ 
-		ZaymonFC & Added unittest file and added test ideas to README.md \\ 
-		ZaymonFC & Added .gitignore file and removed postcompile latex objects \\ 
-		ZaymonFC & Merge branch 'master' of github.com/ZaymonFC/2810ICT\_Assignment \\ 
-		ZaymonFC & Modified report preamble to remove redundant packages \\ 
-		Natnicha & Added headings and user requirements \\ 
-		ZaymonFC & Added LaTeX template for assignment documentation \\ 
-		ZaymonFC & Added program files and created project directory structure \\ 
-		ZaymonFC & Initial Commit \\ \hline
-		
-	\end{tabular}
-	
-	\par\vspace{1cm}\small Note: Repository is private to prevent plagiarism. \textbar{} This log was created by using the command \begin{lstlisting} 
+	\par\vspace{1cm}\small Note: Repository is private. \textbar{} This log was created by using the command \begin{lstlisting} 
 	git log --pretty=format:`%h;%an;%s' > ./log.csv\end{lstlisting}
+	
+\pagebreak
+	\begin{figure}[!h]
+		\centering
+		\includegraphics[scale=0.6]{git}
+		\caption{Effects of efforts/commits over time}
+	\end{figure}
+	\par 	The GitHub repository was created after the Milestone 1 completion as the program did not have many previous versions. Above, denoted in figure 3, is a graph of the commits done each day between the submission of milestone 1 and milestone 2. It a representation of the work effort put towards the project which can determines the work needed for the completion of the final milestone. To successfully complete the final milestone and all its requirements. The program will have to be worked on either a daily basis or with one day in between gap to ensure the two other minesweeper game modes are functional.
 	
 	\pagebreak
 	

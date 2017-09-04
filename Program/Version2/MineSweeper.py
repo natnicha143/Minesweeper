@@ -16,10 +16,9 @@ class MineSweeper:
         self.root.resizable(width=False, height=False)
         self.model = Grid()
         self.controller = BoardController(self.model)
-        self.view = GameView(self.controller, self.model, self.width, self.height)
+        self.view = GameView(self.controller, self.model)
         self.topmenu = TopMenu(self.root, self.model, self.view, self.board)
         self.root.mainloop()
-
 
 MineSweeper()
 

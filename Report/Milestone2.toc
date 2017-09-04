@@ -8,8 +8,6 @@
 \contentsline {subsection}{\numberline {1.3}Software Architecture}{7}
 \contentsline {subsection}{\numberline {1.4}Software Design}{8}
 \contentsline {subsubsection}{Design Goals}{8}
-\contentsline {subsubsection}{Dynamic Modelling}{8}
-\contentsline {subsubsection}{Structural Modelling}{9}
-\contentsline {subsubsection}{Software Patterns}{10}
-\contentsline {subsection}{\numberline {1.5}Testing}{10}
+\contentsline {subsubsection}{Structural Modelling}{8}
+\contentsline {subsection}{\numberline {1.5}Testing}{9}
 \contentsline {subsubsection}{Version Control History / Log}{11}

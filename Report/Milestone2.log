@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.8.31)  4 SEP 2017 17:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6350 64-bit) (preloaded format=pdflatex 2017.8.31)  4 SEP 2017 19:27
 entering extended mode
 **./Milestone2.tex
 (Milestone2.tex
@@ -594,7 +594,21 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 67.
- [2] [3] [4] [5]
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.72 		\newline
+               
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[2] [3] [4] [5]
 Underfull \hbox (badness 10000) in paragraph at lines 192--192
 []\OT1/cmr/m/n/12 Choosing Dif-fi-culty
  []
@@ -613,39 +627,114 @@ LaTeX Font Info:    Try loading font information for OT1+pcr on input line 221.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ) (pseudo.txt)
-[8] <UML.pdf, id=36, 852.18375pt x 573.14125pt>
+<UML.pdf, id=31, 852.18375pt x 573.14125pt>
 File: UML.pdf Graphic file (type pdf)
  <use UML.pdf>
-Package pdftex.def Info: UML.pdf used on input line 228.
+Package pdftex.def Info: UML.pdf used on input line 226.
 (pdftex.def)             Requested size: 511.3142pt x 343.8874pt.
 
-Overfull \hbox (12.65161pt too wide) in paragraph at lines 228--229
+Overfull \hbox (12.65161pt too wide) in paragraph at lines 226--227
  [][] 
  []
 
-[9 <./UML.pdf>] [10] [11]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+(pseudo.txt) [8]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+(pseudo.txt)
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[9 <./UML.pdf>] [10]
+Underfull \hbox (badness 10000) in paragraph at lines 260--260
+[]\OT1/cmr/m/n/12 Aug 31,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 261--261
+[]\OT1/cmr/m/n/12 Aug 31,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 262--262
+[]\OT1/cmr/m/n/12 Aug 31,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 263--263
+[]\OT1/cmr/m/n/12 Aug 30,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 264--264
+[]\OT1/cmr/m/n/12 Aug 30,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 265--265
+[]\OT1/cmr/m/n/12 Aug 30,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 266--266
+[]\OT1/cmr/m/n/12 Aug 30,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 267--267
+[]\OT1/cmr/m/n/12 Aug 29,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 268--268
+[]\OT1/cmr/m/n/12 Aug 29,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 269--269
+[]\OT1/cmr/m/n/12 Aug 29,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 270--270
+[]\OT1/cmr/m/n/12 Aug 26,
+ []
+
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 304.
- [12] (Milestone2.aux) ) 
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 274.
+[11] <git.pdf, id=50, 844.95674pt x 597.432pt>
+File: git.pdf Graphic file (type pdf)
+ <use git.pdf>
+Package pdftex.def Info: git.pdf used on input line 280.
+(pdftex.def)             Requested size: 506.97795pt x 358.46196pt.
+
+Overfull \hbox (8.31537pt too wide) in paragraph at lines 280--281
+ [][] 
+ []
+
+[12 <./git.pdf>] (Milestone2.aux) ) 
 Here is how much of TeX's memory you used:
- 4367 strings out of 493323
- 58030 string characters out of 3139057
- 185997 words of memory out of 3000000
- 7839 multiletter control sequences out of 15000+200000
+ 4396 strings out of 493323
+ 58400 string characters out of 3139057
+ 253189 words of memory out of 3000000
+ 7863 multiletter control sequences out of 15000+200000
  11217 words of font info for 40 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,10n,43p,1606b,1374s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.en
-c}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/courie
-r/ucrr8a.pfb>
-Output written on Milestone2.pdf (13 pages, 367481 bytes).
+ 39i,10n,43p,1606b,1384s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips
+/base/8r.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/
+Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program F
+iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
+/urw/courier/ucrr8a.pfb>
+Output written on Milestone2.pdf (13 pages, 538192 bytes).
 PDF statistics:
- 78 PDF objects out of 1000 (max. 8388607)
+ 85 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
