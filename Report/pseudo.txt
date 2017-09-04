@@ -1,0 +1,25 @@
+def start_new_game(self, self.grid, self.board):
+    for x in range(self.model.height):
+        for y in range(self.model.width):
+            grid.buttons[x][y].reset()
+            board[x][y]["image"] = ""
+            board[x][y]["text"] = ""
+            board[x][y]["state"] = tk.DISABLED
+            board[x][y]["relief"] = tk.RAISED
+    self.grid.generate_mines()
+    self.model.tiles_revealed = 0
+    self.model.mines_remain = self.model.mines
+    self.model.init_time = time.time()
+
+def end_game(self, win):
+    if win:
+        title = "You won! Hooray!"
+        msg = "Good job! Play again?"
+    else:
+        title = "You lost..."
+        msg = "Play again?"
+    ans = tkmsg.askyesno(title, msg)
+    if ans:
+        self.start_new_game(self.backing_grid, self.board)
+    else:
+        sys.exit()

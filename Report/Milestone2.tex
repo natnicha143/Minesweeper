@@ -47,7 +47,7 @@
 
 \lstset{style=mystyle}
 
-\title{2805ICT, Milestone 2: Progress Report \& UML}
+\title{2805ICT, Milestone 2: Progress Report}
 \author{Natnicha Titiphanpong, s2940970}%\thanks{}}
 \date{\today}
 
@@ -69,7 +69,7 @@
 			\item The state of the board, once the buttons are pressed, are represented by a 'backing grid' which assigns all cells with a number or mine, according to the randomly generated mines and its coordinates.
 			\item The program displays whether a cell has a mine or not by representing it with an image of a mine when pressed and also displaying a message that the game is over.
 		\end{itemize}
-		\newline
+f		\newline
 		Displaying icons |
 		\begin{itemize}
 		\par
@@ -80,24 +80,27 @@
 		\par 
 		\item When the user clicks on a button which reveals a mine, a message is displayed in the window "Game Over!" and the state of the game is disabled. 
 		\end{itemize}
-		Difficulty |
-		\begin{itemize}
-		\par 
-		\item The user has the ability to select a difficulty: beginner, intermediate or advanced. When a difficulty is 	selected, it resets the board to that chosen difficulty and board dimension associated. 
-		\end{itemize}
 		Options |
 		\begin{itemize}
 		\par 
 		\item The user is able to start the game by selecting a difficulty and not a game mode, the program will default to the basic minesweeper game. 
 		\item Selecting the cross at the top right of the window will exit the program and window. 
 		\end{itemize}
+		Flagging | 
+		\begin {itemize}
+		\item The user is able to flag a cell that they believe is a mine.
+		\item If all mines are flagged, the game is won.
+		\end{itemize}
 			\subsubsection{Prioritized list of on-going requirements}
+			Game Mode |
 			\begin{itemize}
-				\item The user is able to flag a cell that they believe is a mine.
-				\item If all mines are flagged, the game is won.
-				\item The scoring system of the game - the game timer. 
 				\item The hexagon and colour-based minesweeper.
-			\end{itemize}	
+			\end{itemize}
+				Difficulty |
+		\begin{itemize}
+			\par 
+			\item The user has the ability to select a difficulty: beginner, intermediate or advanced. When a difficulty is 	selected, it resets the board to that chosen difficulty and board dimension associated. 
+		\end{itemize}	
 		
 	
 	\subsection{Product Use Cases}
@@ -105,7 +108,7 @@
 	\begin{table}[ht]
 	\begin{tabular}{|p{4cm}|p{12cm}|}
 		\hline
-		 & Description \\
+		Game Over Use Case & Description \\
 		\hline
 		Use case name & Game over \\
 		Brief description & The game ends when a mine is uncovered. When the game ends, all ability to interact with the current state of the game will be lost. All the existing mines will uncover, the timer will stop and the score will be set. \\
@@ -117,13 +120,13 @@
 		\hline
 	\end{tabular}
 	\end{table}
-
+	\pagebreak
 	\begin{table}[ht]
 	\begin{tabular}{|p{4cm}|p{12cm}|}
 		\hline
-		 & Description \\
+		Cascading Reveal Use Case & Description \\
 		\hline
-		Use case name & Uncover empty neighbour of tiles. \\
+		Use case name & Cascading Reveal. \\
 		Brief description & The player uncovers an empty tile and continues to uncover empty adjacent tiles while the loop condition is satisfied. \\
 		Actors & Player \\
 		Entry condition & Player must click on an empty cell with empty adjacent cells. \\
@@ -133,27 +136,7 @@
 		\hline
 	\end{tabular}
 	\end{table}
-
-	\pagebreak
-
-	\begin{table}[ht]
-	\begin{tabular}{|p{4cm}|p{12cm}|}
-		\hline
-		 & Description \\
-		\hline
-		Use case name & Player chooses game difficulty. \\
-		Brief description & The player has three difficulty levels to choose from before starting a new game. \\
-		Actors & Player. \\
-		Entry condition & The program must be executed. \\
-		Exit condition & The dimension of the board is set according to the difficulty chosen and the game is playable. \\
-		Flow of activities & 1. Player runs program. \newline 2. Player chooses difficulty from three given.\\
-		Exception conditions & No exceptions, game will not start without choosing a difficulty.\\
-		\hline
-	\end{tabular}
-	\end{table}
-
-\pagebreak 
-	\subsubsection{Pending}
+ 
 	\begin{table}[ht]
 	\begin{tabular}{|p{4cm}|p{12cm}|}
 		\hline
@@ -169,11 +152,11 @@
 		\hline
 	\end{tabular}
 	\end{table}
-
+\pagebreak
 	\begin{table}[ht]
 	\begin{tabular}{|p{4cm}|p{12cm}|}
 		\hline
-		 & Description \\
+		Game Timer Use Case& Description \\
 		\hline
 		Use case name & Game timer \\
 		Brief description & The game timer is the scoring system for the minesweeper game. The shorter the time, the better the score. It begins as soon as the difficulty and game mode is selected for the game. \\
@@ -189,32 +172,65 @@
 	\begin{table}[ht]
 	\begin{tabular}{|p{4cm}|p{12cm}|}
 		\hline
-		& Description \\
+		Reset Game Use Case & Description \\
 		\hline
 		Use case name & Player resets game. \\
 		Brief description & The player may reset the game when desired otherwise the player is prompt to restart the game once completed. A completed game can either be won or lost. \\
 		Actors & Player. \\
-		Entry condition & The game can be reset anytime the board has been configured. The only entry condition would be starting the game once. \\
+		Entry condition & The game can be reset any time the board has been configured. The only entry condition would be starting the game once. \\
 		Exit condition & The game is reset. \\
-		Flow of activities & 1. Player starts new game by selecing mode and difficulty \newline 2. System starts timer \newline 3. System stops timer if: game is won or game is lost. \\
-		Exception conditions & None.\\
+		Flow of activities & 1. Player starts new game by selecting mode and difficulty \newline 2. System starts timer \newline 3. System stops timer when game ends. \\
+		Exception conditions & When a game ends, a window will appear asking the user if they want to play again.\\
 		\hline
 	\end{tabular}
 	\end{table}
-	
+	\pagebreak
+	\subsubsection{Pending}
+	\begin{table}[ht]
+		\begin{tabular}{|p{4cm}|p{12cm}|}
+			\hline
+			Choosing Difficulty Use Case & Description \\
+			\hline
+			Use case name & Player chooses game difficulty. \\
+			Brief description & The player has three difficulty levels to choose from before starting a new game. \\
+			Actors & Player. \\
+			Entry condition & The program must be executed. \\
+			Exit condition & The dimension of the board is set according to the difficulty chosen and the game is playable. \\
+			Flow of activities & 1. Player runs program. \newline 2. Player chooses difficulty from three given.\\
+			Exception conditions & No exceptions, game will not start without choosing a difficulty.\\
+			\hline
+		\end{tabular}
+	\end{table}
 	\pagebreak
 	
 	\subsection{Software Architecture}
 	
-	\par The minesweeper program uses a high level system best described as Model View Controller(MVC). By having an architecture, the program can be split up into three different components which handle different parts of the program. The model component divides the behaviour and data from the view, and can only be changed according to the controller. The MineSweeperModel includes the position of where the mines are on the board, and assigns each tile its number along with the current state of the game. The view component manages the Graphical User Interface (GUI) of the system. It displays the board according to the updates of the model and information provided by the controller, the controller facilitates actions/data between Model and View. There will be three views, each for the type of game mode. The first view is referred to as SquareView, this uses a grid layout manager in Tkinter and its button components whereas the HexagonView will need to use the Canvas tool as the buttons cannot be hexagon shaped. The controller component is what the player/user uses to interact with the game. There is one controller component: ButtonController. The ButtonController handles the actions and configurations of the buttons in the game, as every user clickable component is a button. 
-	\newline
-	\par The MVC architecture supports the separation of concerns design patterns and keeps the code for each concern separate by dividing it into three components. By allowing less overlap in functionality, the software maintians its low coupling. MVC also allows developers to write unit testable code. For smaller programs such as minesweeper, both model classes can be unit tested sufficiently to ensure there are no underlying issues. The main programming language used was Python. It is a cross-platform language, being able to run on Windows and Linux. This was one of the main reasons it was chosen. 
+	\par The minesweeper program is designed based on a high level system best described as Model View Controller(MVC). By having an MVC architecture, the program can be split up into three different components which handle different parts of the program. The model component divides the behaviour and data from the view, and can only be changed according to the controller. The GameModel includes the position of where the mines are on the board, and assigns each tile its number along with the current state of the game. The view component manages the Graphical User Interface (GUI) of the system. It displays the board according to the updates of the model and information provided by the controller, the controller facilitates actions/data between Model and View. There will be three views, each for the type of game mode. The first view is referred to as GameView, this uses a grid layout manager in Tkinter and its button components whereas the HexagonView will need to use the Canvas tool as the buttons cannot be hexagon shaped. The controller component is what the player/user uses to interact with the game. There is one controller component: GameController. The GameController handles the actions and configurations of the buttons in the game, and in future, the canvas as well.
+	\newline \par 
+	The MVC architecture supports the separation of concerns design patterns and keeps the code for each concern separate by dividing it into three components. By allowing less overlap in functionality, the software maintains its low coupling. MVC also allows developers to write unit testable code. For smaller programs such as minesweeper, both model classes can be unit tested sufficiently to ensure there are no underlying issues. The main programming language used was Python. It is a cross-platform language, being able to run on Windows and Linux. This was one of the main reasons it was chosen. 
 
 	\pagebreak
 	
 	\subsection{Software Design}
 	\subsubsection{Design Goals}
-	\par The goal of the project is to not only produce the requirements of the software but also design the software in a way that will ensure the code is resuable. Each class is a blueprint of the object it creates, this infers that the software should have high cohesion, it should only have methods relating to the intention of the class. The program is split into MVC, it is intentionally done this way to make each class purposeful and indepedent of another. Another way to refer to this is coupling. The goal of good software design is to lower coupling so that when a part of software needs to be changed, it does not effect the other. If the layout of the game needs to be modified, it doesn't affect the action of the buttons and certainly not the data stored within them. 
+	\par The goal of the project is to not only produce the requirements of the software but also design the software in a way that will ensure the code is reusable. Each class is a blueprint of the object it creates, this infers that the software should have high cohesion, it should only have methods relating to the intention of the class. The program is split into MVC, it is intentionally done this way to make each class purposeful and independent of another. Another way to refer to this is coupling. The goal of good software design is to lower coupling so that when a part of software needs to be changed, it does not effect the other. If the layout of the game needs to be modified, it doesn't affect the action of the buttons and certainly not the data stored behind them. 
+	
+	\subsubsection{Dynamic Modelling}
+	
+	\begin{figure}[h]
+		\lstinputlisting[language=Python, firstline=14, lastline=25]{pseudo.txt}
+		\caption{}
+	\end{figure}
+\pagebreak
+	\subsubsection{Structural Modelling}
+	\begin{figure}[!h]
+		\centering
+		\includegraphics[scale=0.6]{UML}
+		\caption{UML diagram for the Python implementation of MineSweeper}
+	\end{figure}
+\pagebreak
+	
+	\subsubsection{Software Patterns}
 	
 	
 	\subsection{Testing}
@@ -290,16 +306,7 @@
 	
 	\pagebreak
 	
-	\section{UML}
+
 	
-	\subsection{Dynamic Modelling}
-	\subsubsection{Interaction diagrams}
-	
-	
-	\subsubsection{State-based diagrams}
-	
-	
-	\subsection{Structural Modelling}
-	
-	\subsection{Software Patterns}
+
 \end{document}
