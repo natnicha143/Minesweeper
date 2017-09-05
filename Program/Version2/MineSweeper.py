@@ -1,9 +1,10 @@
 import sys
 from GameModel import Grid
-from GameView import GameView
+from GameView import SquareView
 from TopMenu import TopMenu
 from BoardController import BoardController
 from TopMenu import TopMenu
+from MainMenu import MainMenu
 from tkinter import *
 #Main handles creating GUI, initialises data and calls mainloop
 
@@ -16,7 +17,8 @@ class MineSweeper:
         self.root.resizable(width=False, height=False)
         self.model = Grid()
         self.controller = BoardController(self.model)
-        self.view = GameView(self.controller, self.model)
+        self.view = SquareView(self.controller, self.model)
+        self.mainmenu = MainMenu()
         self.topmenu = TopMenu(self.root, self.model, self.view, self.board)
         self.root.mainloop()
 

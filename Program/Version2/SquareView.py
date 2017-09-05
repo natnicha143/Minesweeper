@@ -2,14 +2,13 @@ from tkinter import *
 import tkinter.messagebox as tkmsg
 import time
 
-class GameView:
+class Square:
     def __init__(self, master, controller, model, width, height, backing_grid):
         self.controller = controller
         self.model = model
         self.width = width
         self.height = height
         self.backing_grid = backing_grid
-        self.start_new_game = start_new_game
         #creating images
         self.flag_img = PhotoImage(file="flag.png")
         self.mine_img = PhotoImage(file="mine.png")
@@ -40,18 +39,7 @@ class GameView:
 
     # def set_parameters(self, argv):
         
-    def end_game(self, win):
-        if win:
-            title = "You won! Hooray!"
-            msg = "Good job! Play again?"
-        else:
-            title = "You lost..."
-            msg = "Play again?"
-        ans = tkmsg.askyesno(title, msg)
-        if ans:
-            self.start_new_game(self.backing_grid, self.board)
-        else:
-            sys.exit()
+
 
 
     
