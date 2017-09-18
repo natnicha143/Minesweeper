@@ -3,37 +3,18 @@ import sys
 import time
 from tkinter import *
 
-#Tile class has attributes: coordinates, whether it is a mine, whether it is revealed and if there are neighbouring mines.
-#A tile can be reset and revealed
-class Tile:
-    #A Tile of the game 
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-        self.reset()
-
-    def reset(self):
-        self.is_mine = False
-        self.revealed = False
-        self.neighbour_mines = 0
-
-    def reveal(self):
-        self.revealed = True
-        return self.is_mine, self.neighbour_mines
-
-
-class Grid:
+class GameModel:
     # A game grid, containing Tiles
     def __init__(self):
         self.height = 10
         self.width = 15
-        self.mines = 20
-        self.mines_remain = self.mines
-        self.tiles_revealed = 0
+        self.size = self.width*self.height
+        self.mine_count = 20
         self.init_time = time.time()
-        self.neighbours = self.populate_game()
+        self.neighbours = self.get_neighbours()
         self.backing_grid = self.get_grid()
-        
+        self.mines = self.generate_mines()
+
     def reset(self):
         for line in self.backing_grid:
             for tile in line:
@@ -72,15 +53,55 @@ class Grid:
         return neighbours
     
     def generate_mines(self):
-        mines = rand.sample([(i, j) for j in range (self.width) for i in range(self.height)], self.mines)
-        for i, j in mines:
-            self.backing_grid[i][j].is_mine = True
-            for i2, j2 in self.neighbours[i, j]:
-                self.backing_grid[i2][j2].neighbour_mines += 1
+        mines = list()
+        for i in range(self.size * self.mine_count):
+            #generate coordinates for mines
+            x = rand.randrange(0, self.size)
+            y = rand.randrange(0, self.size)
+            mines.append([x, y])
+        return mines 
 
-    def create_grid(self):
-        backing_grid = [[Tile(i, j) for i in range(self.width)] for j in range(self.height)]
+    def mine_exists(self, row, col):
+        for mine in self.mines:
+            if mine[0] == row and mine[1] == col:
+                return True
+        return False 
+
+    def create_backing_grid(self):
+        backing_grid = [[0 for col in range(self.width)] for row in range(self.height)]
+        for row in range(self.height):
+            for col in range (self.width):
+                count = 0
+                if self.mine_exists(row, col):
+                    backing_grid[row][col] = 'B'
+                else:
+                    for neighbour in self.neighbours[row, col]:
+                        if self.mine_exists(neighbour[0], neighbour[1]):
+                            count += 1
+                    backing_grid[row][col] = count
         return backing_grid
+
+    def cascade_reveal(self, i, j):
+        reveal = list()
+        adjacent = self.neighbours[i, j]
+        for neighbour in adjacent:
+            if self.backing_grid[neighbour[0]][neighbour[1]] == 0:
+                reveal.append(neighbour)
+
+        while reveal:
+            for cell in reveal:
+                adjacent = self.neighbours[cell[0], cell[1]]
+                if self.backing_grid[cell[0]][cell[1]] == 0:
+                    # self.buttons[cell[0]][cell[1]].itemconfig(relief=SUNKEN, text='', background='pink', state='disabled')
+                    self.backing_grid[cell[0]][cell[1]] = 's'
+                for neighbour in adjacent:
+                    if self.backing_grid[neighbour[0]][neighbour[1]] == 0:
+                        reveal.append(neighbour)
+                    elif self.backing_grid[neighbour[0]][neighbour[1]] == 1:
+                        # self.buttons[neighbour[0]][neighbour[1]].itemconfig(relief=SUNKEN, text='1', background='pink', state='disabled')
+                    elif self.backing_grid[neighbour[0]][neighbour[1]] == 2:
+                        # self.buttons[neighbour[0]][neighbour[1]].itemconfig(relief=SUNKEN, text='2', background='pink', state='disabled')
+                reveal.remove(cell)
 
     def get_neighbours(self):
         return self.neighbours
