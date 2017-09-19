@@ -11,14 +11,11 @@ class GameModel:
         self.size = self.width*self.height
         self.mine_count = 20
         self.init_time = time.time()
-        self.neighbours = self.get_neighbours()
-        self.backing_grid = self.get_grid()
+        self.neighbours = self.populate_game()
         self.mines = self.generate_mines()
-
-    def reset(self):
-        for line in self.backing_grid:
-            for tile in line:
-                tile.reset()
+        self.backing_grid = self.create_backing_grid()
+        self.toggles = [[False for col in range(self.width)]for row in range(self.height)]
+        self.flags = [[False for col in range(self.size)]for row in range(self.height)]
 
     def populate_game(self):
         neighbours = dict()
@@ -92,13 +89,13 @@ class GameModel:
             for cell in reveal:
                 adjacent = self.neighbours[cell[0], cell[1]]
                 if self.backing_grid[cell[0]][cell[1]] == 0:
-                    # self.buttons[cell[0]][cell[1]].itemconfig(relief=SUNKEN, text='', background='pink', state='disabled')
+                    self.toggles[cell[0]][cell[1]] = True
                     self.backing_grid[cell[0]][cell[1]] = 's'
                 for neighbour in adjacent:
                     if self.backing_grid[neighbour[0]][neighbour[1]] == 0:
                         reveal.append(neighbour)
                     elif self.backing_grid[neighbour[0]][neighbour[1]] == 1:
-                        # self.buttons[neighbour[0]][neighbour[1]].itemconfig(relief=SUNKEN, text='1', background='pink', state='disabled')
+                        self.toggles[neighbour[0]][neighbour[1]] = True
                     elif self.backing_grid[neighbour[0]][neighbour[1]] == 2:
                         # self.buttons[neighbour[0]][neighbour[1]].itemconfig(relief=SUNKEN, text='2', background='pink', state='disabled')
                 reveal.remove(cell)
@@ -109,4 +106,6 @@ class GameModel:
     def get_grid(self):
         return self.backing_grid
 
+    def get_mines(self):
+        return self.mines
     
