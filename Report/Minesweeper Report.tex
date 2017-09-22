@@ -1,0 +1,135 @@
+\documentclass[12pt, a4]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.8in]{geometry}
+\def\thesection{\arabic{section}}
+\setcounter{tocdepth}{4}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+% Below are for the code blocks
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{rotating}
+
+% Below are table config
+\setlength{\arrayrulewidth}{0.5mm}
+\setlength{\tabcolsep}{10pt}
+\renewcommand{\arraystretch}{1.5}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.5,0.92}
+\definecolor{bittersweet}{rgb}{1.0, 0.44, 0.37}
+\definecolor{cosmiclatte}{rgb}{0.93, 0.93, 0.93}
+\definecolor{eggshell}{rgb}{0.94, 0.94, 0.9}
+\definecolor{fandango}{rgb}{0.71, 0.2, 0.54}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{cosmiclatte},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{fandango}\small,
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,        
+	breaklines=true,               
+	captionpos=b,                    
+	keepspaces=true,  
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\title{2805ICT, Minesweeper Project}
+\author{Natnicha Titiphanpong, s2940970}%\thanks{}}
+\date{\today}
+
+\begin{document}
+\begin{titlepage}
+	\maketitle 
+\end{titlepage}
+	\tableofcontents
+	\pagebreak
+	\section{Minesweeper} 
+	\subsection{Implementation of Task 1}
+	\par The current  version of minesweeper successfully meets the requirements of the traditional minesweeper game.
+	
+	
+	\section{Software Development Practices}
+	\subsection{Version Control History / Log}
+	\begin{tabular}{ | p{2cm} | p{2cm} | p{11cm} | }
+		\hline
+		Date & User & Activity \\
+		\hline
+		Sep 4, 2017 & Natnicha & Added diagrams to Report \\ 
+		Sep 3, 2017 & Natnicha & Separated create board function in three separate functions for low coupling, removed nested functions. \\ 
+		Sep 2, 2017 & Natnicha & Added UML section to report. Put MV files into classes. \\ 
+		Sep 1, 2017 & Natnicha & Added timer and reset button functions to Program. \\ 
+		Sep 1, 2017 & Natnicha & Added test section to Report. \\ 
+		Aug 31, 2017 & Natnicha & Modified test file and fixed formatting in report. Restructured program into MVC architecture. \\ 
+		Aug 31, 2017 & Natnicha & Merging conflict resolved. \\
+		Aug 31, 2017 & Natnicha & Merging files \\ 
+		Aug 30, 2017 & Natnicha & Modified Software Architecture section in Report. \\ 
+		Aug 30, 2017 & Natnicha & Completed use case progression and added software architecture section to Report. \\ 
+		Aug 30, 2017 & Natnicha & Added more use cases. \\ 
+		Aug 30, 2017 & Natnicha & Modified activation button function to handle functionality depending on the backing grid \\ 
+		Aug 29, 2017 & Natnicha & Added game end function to handle the program when the game is over. \\ 
+		Aug 29, 2017 &Natnicha & Fixed cascading reveal to display empty cells and cells adjacent to. \\ 
+		Aug 29, 2017 & Natnicha & Added colour scheme to GUI minesweeper.py \\
+		Aug 26, 2017 & Natnicha & Added images to buttons for GUI. \\ 
+		\hline
+	\end{tabular}
+	
+	\par\vspace{1cm}\small Note: Repository is private. \textbar{} This log was created by using the command \begin{lstlisting} 
+	git log --pretty=format:`%h;%an;%s' > ./log.csv\end{lstlisting}
+	
+	\par 
+	
+	\section{Design Principles}
+	Explain design principles including of least privilege and fail-safe defaults, separation of concerns, information hiding, coupling and cohesion, and encapsulation.
+	
+	\section{Design Process}
+	Describe the design process for a software development project for each of the main software design methods
+
+	\section{System Models}
+	Create appropriate system models for the structure and behaviour of software products from their requirements specifications
+
+	\section{Design Paradigm}
+	Use a design paradigm to design a simple software system, and explain how system design principles have been applied in this design.
+	\par 
+
+	\section{Software Architecture}
+	Select an appropriate software architecture as the design basis for a given software requirements specification, justify the selection based on its advantages over alternative architectures.
+	
+	\section{Design Patterns}
+	Create software programs that make use of appropriate design patterns.
+	Note: discussion of code and UML may suffice 
+	
+	\section{User Interface}
+	Create user interface software using either event driven or callback based designs
+	
+	The user interface uses an event driven based design. There is an event and a listener, the listener is notified when an event occurs by button click. The event which is bind to the button using an event-handler. The program binds each click to a button. As the player interacts with the game, the game is played with the event of a button press. The event handler function reacts depending on the hidden backing board and the minesweeper board is modified in one of the four different ways. The first way the board can be modified is by clicking a button with a number, which only reveals its own underlying square. The second way is for the square to be empty which checks adjacent squares if they are also empty, this check is done in the cascade reveal function. Thirdly, the underlying cell could be a mine ultimately disabling the state of the board and ending the game. Lastly, the user can flag the square and not activate the button at all but uses the right mouse click event to bind the flag as an overlaying image. 
+	\section{Model-View Controller}
+	Explain the importance of Model-View controller to interface programming.
+	
+	\section{Good Software Design}
+	Discuss the properties of good software design including the nature and the role of associated documentation.
+	
+	A good software design should correctly implement all the requirements and functionalities defined in Software Requirement Specification document. 
+	
+	After the deployment of the software, it should be able to be maintained and easily amenable to change. 
+	
+	
+	\section{Different Designs}
+	Create appropriate design documentation for a variety of different designs.
+
+	
+
+\end{document}
