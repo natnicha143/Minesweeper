@@ -41,7 +41,6 @@ def create_board(master, grid, mine, flag):
         return b
 
     board = [[create_button(i, j) for col in range(ms.width)] for row in range(ms.height)]
-    frame.pack(padx=10, pady=10, side=BOTTOM)
     return board
 
 
