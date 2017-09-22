@@ -1,21 +1,19 @@
 import random as rand
-import sys
-import time
 from tkinter import *
 
 class GameModel:
     # A game grid, containing Tiles
-    def __init__(self):
-        self.height = 10
-        self.width = 15
-        self.size = self.width*self.height
-        self.mine_count = 20
-        self.init_time = time.time()
+    def __init__(self, height, width, mines):
+        self.height = height
+        self.width = width
+        self.size = self.width * self.height
+        self.mine_count = mines
         self.neighbours = self.populate_game()
         self.mines = self.generate_mines()
         self.backing_grid = self.create_backing_grid()
-        self.toggles = [[False for col in range(self.width)]for row in range(self.height)]
-        self.flags = [[False for col in range(self.size)]for row in range(self.height)]
+        self.game_over = False
+        self.toggled = [[False for i in range(self.width)]for j in range(self.height)]
+        self.flagged = [[False for i in range(self.size)]for j in range(self.height)]
 
     def populate_game(self):
         neighbours = dict()
@@ -84,21 +82,42 @@ class GameModel:
         for neighbour in adjacent:
             if self.backing_grid[neighbour[0]][neighbour[1]] == 0:
                 reveal.append(neighbour)
+                self.toggled[neighbour[0]][neighbour[1]] = True                
 
         while reveal:
             for cell in reveal:
                 adjacent = self.neighbours[cell[0], cell[1]]
                 if self.backing_grid[cell[0]][cell[1]] == 0:
-                    self.toggles[cell[0]][cell[1]] = True
+                    self.toggled[cell[0]][cell[1]] = True
                     self.backing_grid[cell[0]][cell[1]] = 's'
                 for neighbour in adjacent:
                     if self.backing_grid[neighbour[0]][neighbour[1]] == 0:
                         reveal.append(neighbour)
+                        self.toggled[neighbour[0]][neighbour[1]] = True
                     elif self.backing_grid[neighbour[0]][neighbour[1]] == 1:
-                        self.toggles[neighbour[0]][neighbour[1]] = True
+                        self.toggled[neighbour[0]][neighbour[1]] = True
                     elif self.backing_grid[neighbour[0]][neighbour[1]] == 2:
-                        # self.buttons[neighbour[0]][neighbour[1]].itemconfig(relief=SUNKEN, text='2', background='pink', state='disabled')
+                        self.toggled[neighbour[0]][neighbour[1]] = True
                 reveal.remove(cell)
+
+    def toggle_btn(self, i, j):
+        if self.toggled[i][j]:
+            return
+        if self.flagged[i][j]:
+            self.toggled[i][j] = False
+            return
+        if self.backing_grid[i][j] == 0:
+            self.cascade_reveal(i, j)
+        if self.backing_grid[i][j] == 'B':
+            self.game_over = True
+           
+
+    def flag_btn(self, i, j):
+        if self.flagged[i][j]:
+            return
+        if self.toggled[i][j]:
+            self.flagged[i][j] = False
+        
 
     def get_neighbours(self):
         return self.neighbours
@@ -106,6 +125,9 @@ class GameModel:
     def get_grid(self):
         return self.backing_grid
 
-    def get_mines(self):
-        return self.mines
+    def get_toggled(self):
+        return self.toggled
+
+    def get_flagged(self):
+        return self.flagged
     
