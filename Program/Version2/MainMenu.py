@@ -24,3 +24,5 @@ class MainMenu(Frame):
         self.squaresweeper_btn = Button(self.menu_frame, image=self.sqsweeper_img, borderwidth=2)
         self.hexsweeper_btn = Button(self.menu_frame, image=self.hexsweeper_img, borderwidth=2)
         self.coloursweeper_btn = Button(self.menu_frame, image=self.coloursweeper_img, borderwidth=2)
+
+        # use tkinter place() to position buttons

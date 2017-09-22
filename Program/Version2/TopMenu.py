@@ -3,6 +3,7 @@ import time
 
 class TopMenu:
     def __init__(self, master, model, view, board):
+        Frame.__init__(self, master)
         self.master = master
         self.model = model
         self.view = view 

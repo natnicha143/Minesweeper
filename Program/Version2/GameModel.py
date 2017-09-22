@@ -14,8 +14,8 @@ class GameModel:
         self.neighbours = self.populate_game()
         self.mines = self.generate_mines()
         self.backing_grid = self.create_backing_grid()
-        self.toggles = [[False for col in range(self.width)]for row in range(self.height)]
-        self.flags = [[False for col in range(self.size)]for row in range(self.height)]
+        self.toggled = [[False for col in range(self.width)]for row in range(self.height)]
+        self.flagged = [[False for col in range(self.size)]for row in range(self.height)]
 
     def populate_game(self):
         neighbours = dict()
@@ -89,16 +89,19 @@ class GameModel:
             for cell in reveal:
                 adjacent = self.neighbours[cell[0], cell[1]]
                 if self.backing_grid[cell[0]][cell[1]] == 0:
-                    self.toggles[cell[0]][cell[1]] = True
+                    self.toggled[cell[0]][cell[1]] = True
                     self.backing_grid[cell[0]][cell[1]] = 's'
                 for neighbour in adjacent:
                     if self.backing_grid[neighbour[0]][neighbour[1]] == 0:
                         reveal.append(neighbour)
                     elif self.backing_grid[neighbour[0]][neighbour[1]] == 1:
-                        self.toggles[neighbour[0]][neighbour[1]] = True
+                        self.toggled[neighbour[0]][neighbour[1]] = True
                     elif self.backing_grid[neighbour[0]][neighbour[1]] == 2:
-                        # self.buttons[neighbour[0]][neighbour[1]].itemconfig(relief=SUNKEN, text='2', background='pink', state='disabled')
+                        self.toggled[neighbour[0]][neighbour[1]] = True
                 reveal.remove(cell)
+
+    
+
 
     def get_neighbours(self):
         return self.neighbours
