@@ -21,9 +21,9 @@ class Square:
         self.top_frame = Frame(master, borderwidth=2, height=40, relief=GROOVE, bg="#EA7CA1")
         self.top_frame.pack(padx=0, pady=0, side=TOP, fill="x")
         #create board of buttons
+        self.current_col = 0
+        self.current_row = 0
         self.buttons = self.create_buttons()
-
-
 
     #creates buttons and stores within frame created, binds buttons to event_handler
     def create_buttons(self):
@@ -31,28 +31,35 @@ class Square:
         for row in range(self.height):
             buttons.append([])
             for col in range(self.width):
-                buttons[row].append(Button(self.game_frame, borderwidth=1, bg="#F597CA", height=1, width=3))
+                buttons[row].append(Button(self.game_frame, borderwidth=1, bg="#F597CA", height=2, width=5))
                 buttons[row][col].grid(row=row, column=col)
-                buttons[row][col].bind("<Button-1>", lambda: : self.button_bindings())
-                buttons[row][col].bind("<Button-3>", lambda: : self.button_bindings())
+                buttons[row][col].bind("<Button-1>", self.left_binding)
+                buttons[row][col].bind("<Button-3>", self.right_binding)
+                buttons[row][col].configure(command=lambda i=row, j=col: self.set_coordinates(i, j))
         return buttons 
+        
+    def set_coordinates(self, i, j):
+        self.current_row = i
+        self.current_col = j
 
-    def button_bindings(self, event, row, col):
-        if event.type == 1:
-            self.controller.left_handler(row, col)
-        elif event.type == 3:
-            self.controller.right_handler(row, col)
-        else:
-            raise Exception('Invalid event.')
-
-    def game_over(self): 
+    def left_binding(self, event):
+        self.controller.left_handler(self.current_row, self.current_col)
+        self.display()
+        if self.model.get_game_over() == True:
+            self.display_mines()
+            
+    def display_mines(self):
         for i in range(self.height):
             for j in range(self.width): 
-                if self.backing_grid == 'B':
-                    self.buttons[i][j].configure(image="self.mine_img")
+                if self.backing_grid[i][j] == 'B':
+                    self.buttons[i][j].configure(relief=SUNKEN, image=self.mine_img, command='')
                     tkmsg.showinfo("Mine sweeper", "Game Over!") 
                     self.game_frame.destroy()
                     self.game_frame.quit()
+
+    def right_binding(self, event):
+        self.controller.right_handler(self.current_row, self.current_col)
+        self.display()
 
 
     def display(self):
@@ -63,7 +70,7 @@ class Square:
             for j in range(self.height):
                 if toggled[i][j]:
                     if flagged[i][j]:
-                        self.buttons[i][j].configure(image="self.flag_img")
+                        self.buttons[i][j].configure(image=self.flag_img)
                     else: 
                         self.buttons[i][j].configure(image="")
                 else:

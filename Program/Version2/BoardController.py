@@ -7,9 +7,9 @@ class BoardController:
         self.model = model
 
     def left_handler(self, i, j):
-        self.model.toggle_btn()
+        self.model.toggle_btn(i, j)
 
     def right_handler(self, i, j):
-        self.model.flag_btn()
+        self.model.flag_btn(i, j)
 
 

@@ -18,7 +18,6 @@ class MineSweeper:
         self.height = self.mainmenu.height
         self.width = self.mainmenu.width
         self.mines = self.mainmenu.mines
-        print(self.width, self.height)
         self.model = GameModel(self.height, self.width, self.mines)
         self.controller = BoardController(self.model)
         self.view = Square(self.root, self.controller, self.model, self.height, self.width)

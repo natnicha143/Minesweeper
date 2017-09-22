@@ -93,7 +93,6 @@ class GameModel:
                 for neighbour in adjacent:
                     if self.backing_grid[neighbour[0]][neighbour[1]] == 0:
                         reveal.append(neighbour)
-                        self.toggled[neighbour[0]][neighbour[1]] = True
                     elif self.backing_grid[neighbour[0]][neighbour[1]] == 1:
                         self.toggled[neighbour[0]][neighbour[1]] = True
                     elif self.backing_grid[neighbour[0]][neighbour[1]] == 2:
@@ -101,16 +100,17 @@ class GameModel:
                 reveal.remove(cell)
 
     def toggle_btn(self, i, j):
+        print(i, j)
         if self.toggled[i][j]:
             return
         if self.flagged[i][j]:
-            self.toggled[i][j] = False
-            return
-        if self.backing_grid[i][j] == 0:
+            self.flagged[i][j] = False
+            return 
+        if self.backing_grid[i][j] == 0: 
             self.cascade_reveal(i, j)
         if self.backing_grid[i][j] == 'B':
             self.game_over = True
-           
+
 
     def flag_btn(self, i, j):
         if self.flagged[i][j]:
@@ -118,6 +118,8 @@ class GameModel:
         if self.toggled[i][j]:
             self.flagged[i][j] = False
         
+    def get_game_over(self):
+        return self.game_over
 
     def get_neighbours(self):
         return self.neighbours

@@ -5,7 +5,7 @@ class MainMenu(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
 
-        self.menu_frame = Frame(master, borderwidth=2, bg="pink", height=2000, width=2000)
+        self.menu_frame = Frame(master, borderwidth=2, bg="pink")
         self.menu_frame.pack()
         self.difficulty_img = PhotoImage(file="images/difficulty.png")
         self.beginner_img = PhotoImage(file="images/beginner.png")
@@ -13,18 +13,19 @@ class MainMenu(Frame):
         self.advanced_img = PhotoImage(file="images/advanced.png")
         self.sqsweeper_img = PhotoImage(file="images/squaresweeper.png")
 
-        self.squaresweeper_lbl = Label(self.menu_frame, image=self.sqsweeper_img)
+        self.squaresweeper_lbl = Label(self.menu_frame, image=self.sqsweeper_img, width=250)
+        self.squaresweeper_lbl.pack(fill=BOTH, expand=1)
         self.difficulty_lbl = Label(self.menu_frame, image=self.difficulty_img)
         self.difficulty_lbl.pack(fill=BOTH, expand=1)
 
-        self.beginner_btn = Button(self.menu_frame, image=self.beginner_img, borderwidth=2, width=300, height=100)
+        self.beginner_btn = Button(self.menu_frame, image=self.beginner_img, borderwidth=2, width=300, height=100, bg="pink")
         self.beginner_btn.pack()
         # self.beginner_btn.place(relx=0.5, rely=0.5, anchor=CENTER)
 
-        self.intermediate_btn = Button(self.menu_frame, image=self.intermediate_img, borderwidth=2, width=300, height=100)
+        self.intermediate_btn = Button(self.menu_frame, image=self.intermediate_img, borderwidth=2, width=300, height=100, bg="pink")
         self.intermediate_btn.pack()
         
-        self.advanced_btn = Button(self.menu_frame, image=self.advanced_img, borderwidth=2, width=300, height=100)
+        self.advanced_btn = Button(self.menu_frame, image=self.advanced_img, borderwidth=2, width=300, height=100, bg="pink")
         self.advanced_btn.pack()
 
         self.beginner_btn.configure(command=lambda: self.set_difficulty('beginner'))
