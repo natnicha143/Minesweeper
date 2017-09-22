@@ -24,6 +24,7 @@ class Square:
         self.current_col = 0
         self.current_row = 0
         self.buttons = self.create_buttons()
+        self.timer()
 
     #creates buttons and stores within frame created, binds buttons to event_handler
     def create_buttons(self):
@@ -37,31 +38,36 @@ class Square:
                 buttons[row][col].bind("<Button-3>", self.right_binding)
                 buttons[row][col].configure(command=lambda i=row, j=col: self.set_coordinates(i, j))
         return buttons 
-        
+
+    # sets the coordinates of each button
     def set_coordinates(self, i, j):
         self.current_row = i
         self.current_col = j
 
+    # used for binding to button 1 (left click)
     def left_binding(self, event):
         self.controller.left_handler(self.current_row, self.current_col)
         self.display()
         if self.model.get_game_over() == True:
             self.display_mines()
-            
+    
+    # used for displaying all mines on the board and if game_over is True
+
     def display_mines(self):
         for i in range(self.height):
             for j in range(self.width): 
                 if self.backing_grid[i][j] == 'B':
-                    self.buttons[i][j].configure(relief=SUNKEN, image=self.mine_img, command='')
-                    tkmsg.showinfo("Mine sweeper", "Game Over!") 
-                    self.game_frame.destroy()
-                    self.game_frame.quit()
+                    self.buttons[i][j].configure(relief=SUNKEN, image=self.mine_img, command='', height=35, width=38)
+        tkmsg.showinfo("Mine sweeper", "Game Over!") 
+        self.game_frame.destroy()
+        self.game_frame.quit()
 
+    # used for binding to button 3 (right click)
     def right_binding(self, event):
         self.controller.right_handler(self.current_row, self.current_col)
         self.display()
 
-
+    # display function for each situation apart from mine
     def display(self):
         backing_grid = self.model.get_grid()
         toggled = self.model.get_toggled()
@@ -70,7 +76,7 @@ class Square:
             for j in range(self.height):
                 if toggled[i][j]:
                     if flagged[i][j]:
-                        self.buttons[i][j].configure(image=self.flag_img)
+                        self.buttons[i][j].configure(image=self.flag_img, height=35, width=38)
                     else: 
                         self.buttons[i][j].configure(image="")
                 else:
@@ -80,15 +86,18 @@ class Square:
                         self.buttons[i][j].configure(relief=SUNKEN, text=backing_grid[i][j], background='pink', state='disabled')
 
 
-
+    # returns a list of buttons
     def get_buttons(self):
         return self.buttons
 
+    # creates the timer in top frame
     def timer(self):
         timer_str = StringVar()
         timer_str.set(int((time.time() - self.init_time)//1))
         time_counter = Label(self.top_frame, height=1, width=4, bg='#EA7CA1', textvariable=timer_str)
-        time_counter.grid(row=0, column=4, padx=5, sticky=E)    
+        time_counter.grid(row=0, column=4, padx=5, sticky=E) 
+  
+
     # method in the view which looks at the backing_grid, toggles 
     # and covers from the model with 3 getters (in model) and configures all buttons to look like what the model is
     # Loops through every button and configures it based on how the model looks

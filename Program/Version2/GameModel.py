@@ -15,6 +15,7 @@ class GameModel:
         self.toggled = [[False for i in range(self.width)]for j in range(self.height)]
         self.flagged = [[False for i in range(self.size)]for j in range(self.height)]
 
+    # function that populates the board and returns a dictionary of each cell's adjacent cells
     def populate_game(self):
         neighbours = dict()
         for row in range(self.height):
@@ -47,6 +48,7 @@ class GameModel:
                 neighbours[row, col] = adjacent
         return neighbours
     
+    # function that populates the grid with mines, returns a list of mines
     def generate_mines(self):
         mines = list()
         for i in range(self.size * self.mine_count):
@@ -56,12 +58,14 @@ class GameModel:
             mines.append([x, y])
         return mines 
 
+    # function that returns a boolean: True if mine exists in current position, False if otherwise
     def mine_exists(self, row, col):
         for mine in self.mines:
             if mine[0] == row and mine[1] == col:
                 return True
         return False 
 
+    # function that creates the backing board for the game, assigns a number or letter depending on its value
     def create_backing_grid(self):
         backing_grid = [[0 for col in range(self.width)] for row in range(self.height)]
         for row in range(self.height):
@@ -76,6 +80,7 @@ class GameModel:
                     backing_grid[row][col] = count
         return backing_grid
 
+    # called when an empty cell of value 0 is clicked, will reveal all surrounding cells if the condition is met
     def cascade_reveal(self, i, j):
         reveal = list()
         adjacent = self.neighbours[i, j]
@@ -99,6 +104,7 @@ class GameModel:
                         self.toggled[neighbour[0]][neighbour[1]] = True
                 reveal.remove(cell)
 
+    # mutator function for right click  
     def toggle_btn(self, i, j):
         print(i, j)
         if self.toggled[i][j]:
@@ -111,25 +117,30 @@ class GameModel:
         if self.backing_grid[i][j] == 'B':
             self.game_over = True
 
-
+    # mutator function for right click
     def flag_btn(self, i, j):
         if self.flagged[i][j]:
             return
         if self.toggled[i][j]:
             self.flagged[i][j] = False
-        
+    
+    # gets the game_over boolean variable
     def get_game_over(self):
         return self.game_over
 
+    #gets the dictionary of neighbours
     def get_neighbours(self):
         return self.neighbours
 
+    # gets the backing grid list of lists
     def get_grid(self):
         return self.backing_grid
 
+    # gets the toggled boolean list of lists
     def get_toggled(self):
         return self.toggled
 
+    # gets the toggled boolean list of lists
     def get_flagged(self):
         return self.flagged
     

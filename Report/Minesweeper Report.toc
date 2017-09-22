@@ -5,10 +5,10 @@
 \contentsline {section}{\numberline {3}Design Principles}{4}
 \contentsline {section}{\numberline {4}Design Process}{4}
 \contentsline {section}{\numberline {5}System Models}{4}
-\contentsline {section}{\numberline {6}Design Paradigm}{4}
-\contentsline {section}{\numberline {7}Software Architecture}{4}
-\contentsline {section}{\numberline {8}Design Patterns}{4}
-\contentsline {section}{\numberline {9}User Interface}{4}
-\contentsline {section}{\numberline {10}Model-View Controller}{5}
-\contentsline {section}{\numberline {11}Good Software Design}{5}
-\contentsline {section}{\numberline {12}Different Designs}{5}
+\contentsline {section}{\numberline {6}Design Paradigm}{6}
+\contentsline {section}{\numberline {7}Software Architecture}{6}
+\contentsline {section}{\numberline {8}Design Patterns}{7}
+\contentsline {section}{\numberline {9}User Interface}{7}
+\contentsline {section}{\numberline {10}Model-View Controller}{7}
+\contentsline {section}{\numberline {11}Good Software Design}{7}
+\contentsline {section}{\numberline {12}Different Designs}{7}

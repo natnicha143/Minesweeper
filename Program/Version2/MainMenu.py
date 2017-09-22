@@ -4,23 +4,23 @@ from tkinter import *
 class MainMenu(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
-
+        # create main menu frame
         self.menu_frame = Frame(master, borderwidth=2, bg="pink")
         self.menu_frame.pack()
+        # create images for menu
         self.difficulty_img = PhotoImage(file="images/difficulty.png")
         self.beginner_img = PhotoImage(file="images/beginner.png")
         self.intermediate_img = PhotoImage(file="images/intermediate.png")
         self.advanced_img = PhotoImage(file="images/advanced.png")
-        self.sqsweeper_img = PhotoImage(file="images/squaresweeper.png")
-
-        self.squaresweeper_lbl = Label(self.menu_frame, image=self.sqsweeper_img, width=250)
-        self.squaresweeper_lbl.pack(fill=BOTH, expand=1)
+        self.logo = PhotoImage(file="images/squaresweeper.png")
+        # give each image a tkinter type
+        self.logo_lbl = Label(self.menu_frame, image=self.logo, width=250)
+        self.logo_lbl.pack(fill=BOTH, expand=1)
         self.difficulty_lbl = Label(self.menu_frame, image=self.difficulty_img)
-        self.difficulty_lbl.pack(fill=BOTH, expand=1)
 
+        self.difficulty_lbl.pack(fill=BOTH, expand=1)
         self.beginner_btn = Button(self.menu_frame, image=self.beginner_img, borderwidth=2, width=300, height=100, bg="pink")
         self.beginner_btn.pack()
-        # self.beginner_btn.place(relx=0.5, rely=0.5, anchor=CENTER)
 
         self.intermediate_btn = Button(self.menu_frame, image=self.intermediate_img, borderwidth=2, width=300, height=100, bg="pink")
         self.intermediate_btn.pack()
@@ -28,11 +28,12 @@ class MainMenu(Frame):
         self.advanced_btn = Button(self.menu_frame, image=self.advanced_img, borderwidth=2, width=300, height=100, bg="pink")
         self.advanced_btn.pack()
 
+        # configure buttons to get the settings for each button
         self.beginner_btn.configure(command=lambda: self.set_difficulty('beginner'))
         self.intermediate_btn.configure(command=lambda: self.set_difficulty('intermediate'))
         self.advanced_btn.configure(command=lambda: self.set_difficulty('advanced'))
 
-    
+    # used to set the parameters of the game
     def set_difficulty(self, x):
         if x == 'beginner':
             self.mines = 10
@@ -49,5 +50,6 @@ class MainMenu(Frame):
         self.menu_frame.destroy()
         self.menu_frame.quit()
 
+    # gets the settings stored in set_difficulty
     def get_settings(self):
         return [self.height, self.width, self.mines]
