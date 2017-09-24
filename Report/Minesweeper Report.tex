@@ -59,6 +59,7 @@
 	\pagebreak
 	\section{Minesweeper} 
 	\subsection{Fully Functional Implementation of Task 1}
+	Link: https://youtu.be/d5HWxtuCzrk 
 		\begin{figure}[!h]
 			\centering
 			\includegraphics[scale=0.7]{menu}
@@ -75,6 +76,7 @@
 		\newpage
 	\subsection{Cross platform}
 	\par The programming language chosen - Python allows the program to be executable on Windows and Linux. The Graphic User Interface (GUI) modules are available to both platforms. Therefore, when creating a program that requires a GUI, Python was considered first when accounting for cross-platform applications. 
+	Link: https://youtu.be/Hnfs919bH2s
 	
 	\section{Software Development Practices}
 	\subsection{Version Control History / Log}
@@ -121,17 +123,35 @@
 	The development of this program required the use of version control software to save versions of the project and also to monitor/measure productivity. GitHub was created as an online hosting solution for git repositories. Git records a log of past commits pushed to the repository which allows for backtracking of file versions.
 	\section{Design Principles}
 	\subsection{Least privilege and fail-safe defaults}
-	\par
+	\par There are no  security risks involved with playing the minesweeper game, all users may access and play the game. Fail-safe defaults implies a basic lack of access for all users
+	unless the condition of the user is identified with a permission. The users may not access anything beyond the two views of the game: MainMenu and SquareView and cannot 
+	access any underlying data of the game, only what is necessary to play the game. 
 	
 	\subsection{Separation of concerns and information hiding}
-	\par
+	\par One of the most important principles in software engineering is the separation of concerns. It follows the idea of avoiding co-locating different concerns within the software, which
+	ensures the program is less likely to violate the Don't Repeat Yourself Principle and become easily maintainable. 
+	Between the GameModel and SquareView classes, the logic for determining what numbers to display on the board, the position of the mines are all done in the model whereas the
+	formatting or configuration of the buttons to display once the data has changed is done in the view. If formatting and mutating of data was done in the same class, it would violate
+	the concept of separation of concerns. Alike separation of concerns, information hiding separates the class' details from the object and only enable us to work with the object. 
+	By keeping the details of how an object accomplishes what its API states hidden enables us to treat the object as a black box. The controller doesn't need to know what the model looks like,
+	it just needs to be the bridge between the view and controller, where the coordinates of each button are passed from the view to the model so the model knows how to change accordingly. 
 	
 	\subsection{Coupling, cohesion and encapsulation}
-	\par
+	\par For software engineers, the two most important factors about a program are its degree of coupling and cohesion. We always want low coupling where the dependency is minimal
+	between two modules. On the contrary for cohesion, it is a high-degree of cohesion that engineers strive for. The program's subsystems should be split into how strongly-related they are to one another.
+	In the MainMenu class, only the GUI of the buttons is done and the purpose of the main menu is to pass the height, width and mines variable to the model so that it can create the
+	game's format according to its level of difficulty. The MainMenu class is one of the two existing views in the program, even if both SquareView and MainMenu view extend tkinter.Frame
+	and handle the GUI, their purposes are completely different. One class initiates the game model and the other continually mutates the model.
 	
 	\section{Design Process}
 	\par
-	The minesweeper project required a lot of flexibility as the developer had to experiment the GUI class Tkinter and also learn the Model-view controller architecture. The design process used an agile software development method, which is based on the idea that successful development would happen quickly as testing was done regularly. In contrast, the waterfall development process is a more traditional process however, due to the time constraint and also due the low complexity of the system, there was no need to complete processes periodically. The furthest the software process would've progressed to was programming and unit testing. Using agile development, bugs, complications and feature changes are handled better to meet the requirements.
+	The minesweeper project required a lot of flexibility as the developer had to experiment with programming with GUI and using the Tkinter class with Python along with 
+	learning the Model-view controller architecture. The design process used an agile software development method, which is highly preferred in software projects that require
+	a lot of tinkering and testing during production. This development process was based on the idea that successful development would happen quickly as testing was done regularly.
+	This is true for small projects such as minesweeper as there was less thought about the design of the program, and more regarding functionality. 
+	In contrast, the waterfall development process is a more traditional process however, due to the time constraint and also due the low complexity of the system, there was 
+	no need to complete processes periodically. The software would have not progressed past programming and unit testing. Using agile development, bugs, 
+	complications and feature changes are handled better to meet the requirements.
 	
 	\section{System Models}
 
@@ -147,11 +167,18 @@
 		\caption{Main class Minesweeper}
 	\end{figure}
 	
-	\par The program creates an object of each class in order of what needed to be called from first. Since the views extend tkinter's Frame component, the root frame (main frame) needed to be created first to store the views inside. The main menu object was then created as that was the first view for the game and the main loop is executed. The user selects a difficulty and the initial view's frame is destroyed and the quits. This gives the opportunity to create the model object, which the data is stored, the controller which is a facade for the model and the view which will generate the new frame for game play. The root then executes the main loop once again. 
+	\par The program creates an object of each class in order of what needed to be called from first. Since the views extend Tkinter's Frame component, 
+	the root frame (main frame) needed to be created first for the views to extend. The main menu object was then created as that was the first view 
+	for the game as the model needed the variables passed from the main menu view to set the size and difficulty of the board, then the main loop is executed. 
+	The user selects a difficulty and the main menu frame is destroyed and the frame is quit, necessary for the while loop to continue. This gives the 
+	opportunity to create the model object, which the data is stored, the new view will run along with two new frames: and top frame for the score timer and new game button
+	and a bottom frame for the board of buttons. The root then executes the main loop once again. 
 	
 	\section{Design Paradigm}
-
-	\section{Software Architecture}
+	The minesweeper program was written so that if other game modes were required, the engineer would only need to write a new view to display the hexagons and create a function
+	to set the coordinates of the hexagons. All other parts of the software can be effectively reused. To create a more intellectually manageable program, modularity is necessary.
+	It gives engineers one powerful ability - to be able to test modules individually and when fixing bugs, you know for certain that nothing other than what is in your module is
+	broken by the changes you made. Testing the functionality of each button in the view can be done in modules as the affects of the board rely on the underlying number and value of each cell. 
 	
 	\section{Design Patterns}
 	\par The model-view controller heavily uses the Observer pattern especially in the Model and View. When the data in the model class is modified, the view class needs to be notified and updated as it is run. 
@@ -160,17 +187,38 @@
 	\section{User Interface}
 	The user interface uses an event driven based design. There is an event and a listener, the listener is notified when an event occurs by button click. The event which is bind to the button using an event-handler. The program binds each click to a button. As the player interacts with the game, the game is played with the event of a button press. The event handler function reacts depending on the hidden backing board and the minesweeper board is modified in one of the four different ways. The first way the board can be modified is by clicking a button with a number, which only reveals its own underlying square. The second way is for the square to be empty which checks adjacent squares if they are also empty, this check is done in the cascade reveal function. Thirdly, the underlying cell could be a mine ultimately disabling the state of the board and ending the game. Lastly, the user can flag the square and not activate the button at all but uses the right mouse click event to bind the flag as an overlaying image. 
 	
-	\section{Model-View Controller}
-	\par Model view controller (MVC) is an architecture that allows different parts of a system to be loosely coupled (or separated). MVC keeps the code well-organised into three distinctly different sections of code. Views display data from the model and take user actions. Models represent the data and domain logic in the system. And controllers liaise between the View and the Model, often controlling flow. MVC have separated functions will solve the most common software problems of today: readability, modularity, and coupling. This helps programmers reuse and change code as they are able to work in smaller subset that may be more or less isolated from the larger piece of code or functionality. This structure also helps when testing the program, especially unit testing when sections of code need to be tested. As similar code is sectioned into groups, there is better coverage of test cases. 
+	\section{Software Architecture: Model-View Controller & its importance to UI programming}
+	\par Model view controller (MVC) is a type of software architecture that allows different parts of a system to be loosely coupled (or separated). 
+	MVC keeps the code well-organised into three distinctly different sections of code. Views display data from the model and take user actions. 
+	Models represent the data and domain logic in the system. And controllers liaise between the View and the Model, often controlling flow. 
+	MVC have separated functions will solve the most common software problems of today: readability, modularity, and coupling. 
+	This helps programmers reuse and change code as they are able to work in smaller subset that may be more or less isolated from the larger piece of code or 
+	functionality. This structure also helps when testing the program, especially unit testing when sections of code need to be tested. As similar code is 
+	sectioned into groups, there is better coverage of test cases. It is important to use this type of architecture with user interface programming as we want the program
+	to separate the application's logic from the rest of the user interface, which is achievable using MVC. The view only needs to focus on rendering data from the model
+	into the form implied for the user interface. This gives the model the ability to freely respond to instructions and change the state of its information, and notify users
+	in Minesweeper's event-driven system when data changes. 
 	
 	\section{Good Software Design}
-	\par A good software design should correctly implement all the requirements and functionalities defined in Software Requirement Specification document. With no formal methods of design from the start, the software can very quickly become very difficult to manage. We also want to design the software in a way that will ensure the code is reusable. 
-	Since each class is a blueprint of the object it creates, the software will have high cohesion, it should only have methods relating to the intention of the class. It is intentionally done this way to make each class purposeful and independent of another. Another way to refer to this is coupling. 
-	The goal of good software design is to lower coupling so that when a part of software needs to be changed, it does not effect the other. 
-	Although the main menu and the game frame may extend the same root Frame, the program calls the individual menu and game frame to destroy and quit while maintaining the root frame to be passed on and used in the next view. Another good software design concept is modularity. All the functions in the view have the sole purpose of configuring the buttons depending on the state of the model, the model does not do any configuration and independently handles and mutates the data. This purpose helps separate the classes that are not responsible for configuring but for mutating and vice versa.After the deployment of the software, it should be able to be maintained and easily amenable to change which leads onto the next topic, different designs. 
+	\par A good software design should correctly implement all the requirements and functionalities defined in Software Requirement Specification document. With no 
+	formal methods of design from the start, the software can very quickly become very difficult to manage. 
+	We also want to design the software in a way that will ensure the code is reusable. Since each class is a blueprint of the object it creates, 
+	the software will have high cohesion, it should only have methods relating to the intention of the class. It is intentionally done this way to make each 
+	class purposeful and independent of another. The goal of good software design is to lower coupling so that when a part of software needs to be changed, it does not effect the other. 
+	Although the main menu and the game frame may extend the same root Frame, the program calls the individual menu and game frame to destroy 
+	and quit while maintaining the root frame to be passed on and used in the next view. Another good software design concept is modularity. All 
+	the functions in the view have the sole purpose of configuring the buttons depending on the state of the model, the model does not do any 
+	configuration and independently handles and mutates the data. This purpose helps separate the classes that are not responsible for configuring but 
+	for mutating and vice versa.After the deployment of the software, it should be able to be maintained and easily amenable to change which leads onto the 
+	next topic, different designs. 
 	\newpage
 	\section{Different Designs}
-	\par For software developers to create a variety of different designs for their program, comments illustrate how other developers may extend or enhance the already completed program by explaining the purpose of each function. Comments create the opportunity for developers to reuse code and it is imperative to fully understand a block of code with a single, simple and concise comment. It is the only way to capture the intention of the code at the time of writing, when going back to the program later on, it is more effective to continue and progress if there is are basic explanations documented on the same page. Figure 3 below shows the functions in the GameModel class and the associated comments.
+	\par For software developers to create a variety of different designs for their program, comments 
+	illustrate how other developers may extend or enhance the already completed program by explaining the purpose of 
+	each function. Comments create the opportunity for developers to reuse code and it is imperative to fully understand a 
+	block of code with a single, simple and concise comment. It is the only way to capture the intention of the code at the time of 
+	writing, when going back to the program later on, it is more effective to continue and progress if there is are basic explanations documented 
+	on the same page. Figure 3 below shows some of the functions in the GameModel class and the associated comments.
 	
 	\begin{figure}[h]
 		\lstinputlisting[language=Python, firstline=28, lastline=59]{minesweeper.txt}

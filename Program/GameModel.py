@@ -7,13 +7,13 @@ class GameModel:
         self.height = height
         self.width = width
         self.size = self.width * self.height
-        self.mine_count = mines
+        self.mines = mines
+        self.mine_pos = self.generate_mines()
         self.neighbours = self.populate_game()
-        self.mines = self.generate_mines()
         self.backing_grid = self.create_backing_grid()
-        self.game_over = False
         self.toggled = [[False for i in range(self.width)]for j in range(self.height)]
         self.flagged = [[False for i in range(self.size)]for j in range(self.height)]
+        self.game_over = False
 
     # function that populates the board and returns a dictionary of each cell's adjacent cells
     def populate_game(self):
@@ -51,7 +51,7 @@ class GameModel:
     # function that populates the grid with mines, returns a list of mines
     def generate_mines(self):
         mines = list()
-        for i in range(self.size * self.mine_count):
+        for i in range(self.size * self.mines):
             #generate coordinates for mines
             x = rand.randrange(0, self.size)
             y = rand.randrange(0, self.size)
@@ -60,7 +60,7 @@ class GameModel:
 
     # function that returns a boolean: True if mine exists in current position, False if otherwise
     def mine_exists(self, row, col):
-        for mine in self.mines:
+        for mine in self.mine_pos:
             if mine[0] == row and mine[1] == col:
                 return True
         return False 
@@ -68,8 +68,8 @@ class GameModel:
     # function that creates the backing board for the game, assigns a number or letter depending on its value
     def create_backing_grid(self):
         backing_grid = [[0 for col in range(self.width)] for row in range(self.height)]
-        for row in range(self.height):
-            for col in range (self.width):
+        for row in range(self.width):
+            for col in range (self.height):
                 count = 0
                 if self.mine_exists(row, col):
                     backing_grid[row][col] = 'B'
@@ -147,13 +147,22 @@ class GameModel:
     def get_flagged(self):
         return self.flagged
 
+
     def get_game_win(self):
+        correct = 0
+        incorrect = 0
         for i in range (self.width):
             for j in range (self.height):
-                if self.backing_grid[i][j] == 'B' and not self.flagged[i][j]:
-                    return False
-                elif self.flagged[i][j]:
-                    return False
-        return True 
+                if self.backing_grid[i][j] == "B":
+                    if self.flagged[i][j]:
+                        correct += 1
+                    else:
+                        incorrect += 1
+                else:
+                    if self.flagged[i][j]:
+                        incorrect += 1
+        return incorrect == 0
+
+        
                     
     

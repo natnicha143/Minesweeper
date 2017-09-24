@@ -55,6 +55,7 @@ class Square:
         if self.model.get_game_over() or self.model.get_game_win():
             return
         self.controller.right_handler(arg["row"], arg["col"])
+        print(self.model.get_game_win())
         self.display()
         if self.model.get_game_win():
             title = "You won!"
@@ -73,7 +74,7 @@ class Square:
         for i in range(self.height):
             for j in range(self.width): 
                 if self.backing_grid[i][j] == 'B':
-                    self.buttons[i][j].configure(relief=SUNKEN, image=self.mine_img, command='', height=35, width=38, bg='#EA7CA1')
+                    self.buttons[i][j].configure(relief=SUNKEN, image=self.mine_img, height=35, width=38, bg='#EA7CA1')
         title = "You Lost..."
         msg = "Bad luck. Try again?"
         ans = tkmsg.askyesno(title, msg)
@@ -121,7 +122,7 @@ class Square:
 
     # creates new game button in top frame
     def new_game_button(self):
-        newgame_button = Button(self.top_frame, bd=1, width=15, text="New game", command='', bg="#995179")
+        newgame_button = Button(self.top_frame, bd=1, width=15, text="New game", bg="#995179")
         newgame_button.grid(row=0, column=10, padx=2, sticky=E)
         newgame_button.configure(command=lambda: self.return_main())
  

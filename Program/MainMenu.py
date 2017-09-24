@@ -37,7 +37,7 @@ class MainMenu(Frame):
     # used to set the parameters of the game
     def set_difficulty(self, x):
         if x == 'beginner':
-            self.mines = 10
+            self.mines = 5
             self.height = 9
             self.width = 9
         elif x == 'intermediate':
