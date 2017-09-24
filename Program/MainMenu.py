@@ -16,6 +16,7 @@ class MainMenu(Frame):
         # give each image a tkinter type
         self.logo_lbl = Label(self.menu_frame, image=self.logo, width=250, bg="pink")
         self.logo_lbl.place(height=110, width=350, x=150, y=25)
+        
         self.difficulty_lbl = Label(self.menu_frame, image=self.difficulty_img, bg="pink")
         self.difficulty_lbl.place(height=90, width=350, x=150, y=150)
 

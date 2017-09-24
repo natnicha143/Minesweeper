@@ -1,4 +1,3 @@
-import sys
 from GameModel import GameModel
 from SquareView import Square
 from BoardController import BoardController
@@ -11,17 +10,18 @@ class MineSweeper:
 
         #create main window
         self.root = Tk()
-        self.root.title("Minesweeper")
+        self.root.title("Natnicha's Minesweeper")
         self.root.resizable(False, False)
-        self.mainmenu = MainMenu(self.root)
-        self.root.mainloop()
-        self.height = self.mainmenu.height
-        self.width = self.mainmenu.width
-        self.mines = self.mainmenu.mines
-        self.model = GameModel(self.height, self.width, self.mines)
-        self.controller = BoardController(self.model)
-        self.view = Square(self.root, self.controller, self.model, self.height, self.width)
-        self.root.mainloop()
+        while(True):
+            self.mainmenu = MainMenu(self.root)
+            self.root.mainloop()
+            self.height = self.mainmenu.height
+            self.width = self.mainmenu.width
+            self.mines = self.mainmenu.mines
+            self.model = GameModel(self.height, self.width, self.mines)
+            self.controller = BoardController(self.model)
+            self.view = Square(self.root, self.controller, self.model, self.height, self.width)
+            self.root.mainloop()
     
 MineSweeper()
 

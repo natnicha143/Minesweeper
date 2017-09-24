@@ -85,16 +85,16 @@ class GameModel:
         reveal = list()
         adjacent = self.neighbours[i, j]
         for neighbour in adjacent:
-            if self.backing_grid[neighbour[0]][neighbour[1]] == 0:
-                reveal.append(neighbour)
-                self.toggled[neighbour[0]][neighbour[1]] = True                
+            if self.backing_grid[neighbour[0]][neighbour[1]] == 0:    
+                reveal.append(neighbour)    
+                self.toggled[neighbour[0]][neighbour[1]] = True        
 
         while reveal:
             for cell in reveal:
                 adjacent = self.neighbours[cell[0], cell[1]]
                 if self.backing_grid[cell[0]][cell[1]] == 0:
-                    self.toggled[cell[0]][cell[1]] = True
                     self.backing_grid[cell[0]][cell[1]] = 's'
+                    self.toggled[cell[0]][cell[1]] = True
                 for neighbour in adjacent:
                     if self.backing_grid[neighbour[0]][neighbour[1]] == 0:
                         reveal.append(neighbour)
@@ -106,23 +106,26 @@ class GameModel:
 
     # mutator function for right click  
     def toggle_btn(self, i, j):
+        if self.flagged[i][j]:
+            return
         if self.toggled[i][j]:
             return
-        if self.flagged[i][j]:
-            self.flagged[i][j] = False
-            return 
-        if self.backing_grid[i][j] == 0: 
+        elif self.backing_grid[i][j] == 0: 
             self.cascade_reveal(i, j)
-        if self.backing_grid[i][j] == 'B':
+        elif self.backing_grid[i][j] == 'B':
             self.game_over = True
-        print(self.game_over)
+        else:
+            self.toggled[i][j] = True
+  
         
     # mutator function for right click
     def flag_btn(self, i, j):
-        if self.flagged[i][j]:
-            return
         if self.toggled[i][j]:
+            return
+        if self.flagged[i][j]:
             self.flagged[i][j] = False
+        else:
+            self.flagged[i][j] = True
     
     # used for view to access
     def get_game_over(self):
@@ -143,4 +146,14 @@ class GameModel:
     # gets the toggled boolean list of lists
     def get_flagged(self):
         return self.flagged
+
+    def get_game_win(self):
+        for i in range (self.width):
+            for j in range (self.height):
+                if self.backing_grid[i][j] == 'B' and not self.flagged[i][j]:
+                    return False
+                elif self.flagged[i][j]:
+                    return False
+        return True 
+                    
     

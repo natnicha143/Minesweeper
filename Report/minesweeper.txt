@@ -1,0 +1,60 @@
+from GameModel import GameModel
+from SquareView import Square
+from BoardController import BoardController
+from MainMenu import MainMenu
+from tkinter import *
+
+# Main handles creating GUI, initialises data and calls mainloop
+class MineSweeper:
+    def __init__(self):
+
+        #create main window
+        self.root = Tk()
+        self.root.title("Natnicha's Minesweeper")
+        self.root.resizable(False, False)
+        while(True):
+            self.mainmenu = MainMenu(self.root)
+            self.root.mainloop()
+            self.height = self.mainmenu.height
+            self.width = self.mainmenu.width
+            self.mines = self.mainmenu.mines
+            self.model = GameModel(self.height, self.width, self.mines)
+            self.controller = BoardController(self.model)
+            self.view = Square(self.root, self.controller, self.model, self.height, self.width)
+            self.root.mainloop()
+    
+MineSweeper()
+
+# function that populates the board and returns a dictionary of each cell's adjacent cells
+def populate_game(self):
+
+# function that populates the grid with mines, returns a list of mines
+def generate_mines(self):
+
+# function that returns a boolean: True if mine exists in current position, False if otherwise
+def mine_exists(self, row, col):
+
+# function that creates the backing board for the game, assigns a number or letter depending on its value
+def create_backing_grid(self):
+
+# called when an empty cell of value 0 is clicked, will reveal all surrounding cells if the condition is met
+def cascade_reveal(self, i, j):
+
+# mutator function for right click  
+def toggle_btn(self, i, j):
+
+# mutator function for right click
+def flag_btn(self, i, j):
+
+# gets the game_over boolean variable
+def get_game_over(self):
+
+#gets the dictionary of neighbours
+def get_neighbours(self):
+
+# gets the toggled boolean list of lists, function is used for other classes that need to access the list
+def get_toggled(self):
+
+# gets the toggled boolean list of lists, function is used for other classes that need to access the list
+def get_flagged(self):
+  
