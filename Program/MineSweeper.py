@@ -5,7 +5,7 @@ from BoardController import BoardController
 from MainMenu import MainMenu
 from tkinter import *
 
-#Main handles creating GUI, initialises data and calls mainloop
+# Main handles creating GUI, initialises data and calls mainloop
 class MineSweeper:
     def __init__(self):
 

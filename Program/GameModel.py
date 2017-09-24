@@ -106,7 +106,6 @@ class GameModel:
 
     # mutator function for right click  
     def toggle_btn(self, i, j):
-        print(i, j)
         if self.toggled[i][j]:
             return
         if self.flagged[i][j]:
@@ -116,7 +115,8 @@ class GameModel:
             self.cascade_reveal(i, j)
         if self.backing_grid[i][j] == 'B':
             self.game_over = True
-
+        print(self.game_over)
+        
     # mutator function for right click
     def flag_btn(self, i, j):
         if self.flagged[i][j]:
@@ -124,7 +124,7 @@ class GameModel:
         if self.toggled[i][j]:
             self.flagged[i][j] = False
     
-    # gets the game_over boolean variable
+    # used for view to access
     def get_game_over(self):
         return self.game_over
 
