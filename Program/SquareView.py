@@ -97,8 +97,3 @@ class Square:
         time_counter = Label(self.top_frame, height=1, width=4, bg='#EA7CA1', textvariable=timer_str)
         time_counter.grid(row=0, column=4, padx=5, sticky=E) 
   
-
-    # method in the view which looks at the backing_grid, toggles 
-    # and covers from the model with 3 getters (in model) and configures all buttons to look like what the model is
-    # Loops through every button and configures it based on how the model looks
-    # There should be no checking of values in view...

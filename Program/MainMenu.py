@@ -14,9 +14,9 @@ class MainMenu(Frame):
         self.advanced_img = PhotoImage(file="images/advanced.png")
         self.logo = PhotoImage(file="images/squaresweeper.png")
         # give each image a tkinter type
-        self.logo_lbl = Label(self.menu_frame, image=self.logo, width=250)
+        self.logo_lbl = Label(self.menu_frame, image=self.logo, width=250, bg="pink")
         self.logo_lbl.pack(fill=BOTH, expand=1)
-        self.difficulty_lbl = Label(self.menu_frame, image=self.difficulty_img)
+        self.difficulty_lbl = Label(self.menu_frame, image=self.difficulty_img, bg="pink")
 
         self.difficulty_lbl.pack(fill=BOTH, expand=1)
         self.beginner_btn = Button(self.menu_frame, image=self.beginner_img, borderwidth=2, width=300, height=100, bg="pink")
